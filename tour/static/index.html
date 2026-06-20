@@ -67,6 +67,11 @@ body{font-family:-apple-system,"PingFang SC","Microsoft YaHei",sans-serif;
 .node .nm{font-size:11px;font-weight:700;color:var(--ink);line-height:1.2}
 .node .er{font-size:9px;color:var(--green-dd);margin-top:2px}
 
+/* 路线手绘地图 */
+.routemap{border:1px solid var(--line);border-radius:16px;overflow:hidden;margin-bottom:10px;box-shadow:var(--card-sh);background:#fff;cursor:zoom-in;position:relative}
+.routemap img{display:block;width:100%;height:auto}
+.routemap .rm-cap{position:absolute;left:0;right:0;bottom:0;padding:6px 10px;font-size:10px;color:#fff;background:linear-gradient(transparent,rgba(20,30,25,.55));text-align:right}
+
 /* 点位卡 */
 .pcard{background:#fff;border:1px solid var(--line);border-radius:16px;overflow:hidden;margin-top:5px;box-shadow:var(--card-sh)}
 .phero{height:108px;background-size:cover;background-position:center;position:relative}
@@ -188,6 +193,10 @@ body{font-family:-apple-system,"PingFang SC","Microsoft YaHei",sans-serif;
     <div class="chips" id="chips"></div>
 
     <div class="sect">路线 · 点一个点位 = 模拟走到（GPS 触发讲解）</div>
+    <div class="routemap" onclick="window.open('/static/img/route_map.png','_blank')">
+      <img src="/static/img/route_map.png" alt="步语 · 老城南线 手绘导览图" loading="lazy">
+      <div class="rm-cap">手绘导览图 · 点击放大</div>
+    </div>
     <div class="route" id="route"></div>
 
     <div class="pcard" id="pcard" style="display:none">
