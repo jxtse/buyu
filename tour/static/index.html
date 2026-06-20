@@ -4,6 +4,7 @@
 <meta charset="utf-8"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
 <title>步语 BuYu · 实时语音文化导览</title>
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%231F7A5A'/%3E%3Ctext x='32' y='44' font-size='38' font-family='PingFang SC,sans-serif' font-weight='800' fill='white' text-anchor='middle'%3E步%3C/text%3E%3C/svg%3E"/>
 <style>
 :root{
   --green:#1F7A5A; --green-d:#16614680; --green-l:#E8F4EF; --green-dd:#134E3A;
@@ -74,9 +75,25 @@ body{font-family:-apple-system,"PingFang SC","Microsoft YaHei",sans-serif;
 
 /* 点位卡 */
 .pcard{background:#fff;border:1px solid var(--line);border-radius:16px;overflow:hidden;margin-top:5px;box-shadow:var(--card-sh)}
-.phero{height:108px;background-size:cover;background-position:center;position:relative}
-.phero .gps{position:absolute;bottom:8px;left:9px;background:rgba(27,42,36,.82);color:#E8F4EF;font-size:10.5px;padding:4px 9px;border-radius:13px;backdrop-filter:blur(4px);display:flex;align-items:center;gap:5px}
-.phero .gps .pin{width:6px;height:6px;border-radius:50%;background:var(--listen);box-shadow:0 0 0 3px rgba(90,169,230,.35)}
+/* 抵达实拍大图：填满 hero，抵达时淡入+缓推（Ken-Burns） */
+.phero{height:188px;position:relative;overflow:hidden;background:#0E1A14}
+.phero .shot{position:absolute;inset:0;background-size:cover;background-position:center;opacity:0;transform:scale(1.12);
+  transition:opacity .55s ease, transform 6.5s ease-out}
+.phero .shot.show{opacity:1;transform:scale(1.0)}
+.phero::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(0,0,0,.04) 0%,rgba(0,0,0,0) 38%,rgba(8,16,12,.62) 100%);pointer-events:none}
+.phero .gps{position:absolute;bottom:9px;left:10px;background:rgba(27,42,36,.86);color:#E8F4EF;font-size:10.5px;padding:4px 10px;border-radius:13px;backdrop-filter:blur(4px);display:flex;align-items:center;gap:6px;z-index:3;box-shadow:0 3px 12px rgba(0,0,0,.3)}
+.phero .gps .pin{width:7px;height:7px;border-radius:50%;background:var(--listen);box-shadow:0 0 0 3px rgba(90,169,230,.35);animation:gpspulse 1.6s ease-in-out infinite}
+@keyframes gpspulse{0%,100%{box-shadow:0 0 0 3px rgba(90,169,230,.35)}50%{box-shadow:0 0 0 6px rgba(90,169,230,.08)}}
+.phero .cap{position:absolute;right:10px;bottom:9px;z-index:3;font-size:9px;color:rgba(255,255,255,.78);background:rgba(20,30,25,.4);padding:2px 7px;border-radius:9px;backdrop-filter:blur(3px)}
+.phero .pname-ov{position:absolute;left:11px;bottom:32px;z-index:3;color:#fff;text-shadow:0 2px 10px rgba(0,0,0,.6);opacity:0;transform:translateY(8px);transition:.5s .25s}
+.phero .pname-ov.show{opacity:1;transform:none}
+.phero .pname-ov b{font-size:19px;font-weight:800;display:block;letter-spacing:.5px}
+.phero .pname-ov span{font-size:10.5px;color:#CDE7DA}
+/* 抵达瞬间的"已抵达"闪现徽标 */
+.arrive-flash{position:absolute;inset:0;z-index:4;display:flex;align-items:center;justify-content:center;pointer-events:none;opacity:0}
+.arrive-flash.go{animation:arriveflash 1.5s ease forwards}
+.arrive-flash b{background:rgba(31,122,90,.92);color:#fff;font-size:13px;font-weight:800;padding:8px 18px;border-radius:20px;box-shadow:0 8px 30px rgba(31,122,90,.5);display:flex;align-items:center;gap:7px}
+@keyframes arriveflash{0%{opacity:0;transform:scale(.8)}18%{opacity:1;transform:scale(1)}74%{opacity:1;transform:scale(1)}100%{opacity:0;transform:scale(1.05)}}
 .pbody{padding:11px 14px 13px}
 .pbody h3{font-size:17px;color:var(--ink)}
 .pbody .era{font-size:11px;color:var(--green-dd);font-weight:600;margin:1px 0 9px}
@@ -176,6 +193,7 @@ body{font-family:-apple-system,"PingFang SC","Microsoft YaHei",sans-serif;
     <span class="pill">策展数据防幻觉</span>
     <span class="pill">记得你是谁</span>
   </div>
+  <button id="autobtn" style="margin:6px 0 10px;display:inline-flex;align-items:center;gap:8px;background:var(--green);color:#fff;border:none;border-radius:22px;padding:10px 18px;font-size:13px;font-weight:700;cursor:pointer;box-shadow:0 8px 22px rgba(31,122,90,.35)">▶ 自动巡游演示</button>
   <p style="border-left-color:var(--gold);color:#C9B488;font-size:11.5px">右侧面板 = 实时 Harness 链路。每次讲解都能看到语音模型在「听 → 注入三件套 → 开口 → 被打断」。</p>
 </div>
 
@@ -200,7 +218,13 @@ body{font-family:-apple-system,"PingFang SC","Microsoft YaHei",sans-serif;
     <div class="route" id="route"></div>
 
     <div class="pcard" id="pcard" style="display:none">
-      <div class="phero" id="phero"><div class="gps"><span class="pin"></span> 已抵达 · GPS 触发讲解</div></div>
+      <div class="phero" id="phero">
+        <div class="shot" id="shot"></div>
+        <div class="gps"><span class="pin"></span> 已抵达 · GPS 触发讲解</div>
+        <div class="cap" id="pcap"></div>
+        <div class="pname-ov" id="pnameov"><b id="ovname"></b><span id="overa"></span></div>
+        <div class="arrive-flash" id="arriveflash"><b>📍 已抵达目的地</b></div>
+      </div>
       <div class="pbody">
         <h3 id="pname"></h3>
         <div class="era" id="pera"></div>
@@ -354,7 +378,21 @@ function selectPoint(pid){
   curPoint=pid; const pt=DATA.points[pid];
   [...$("route").children].forEach(n=>n.classList.toggle("active", n.querySelector(".nm").textContent===pt.name.replace(/（.*）/,"")));
   $("pcard").style.display="block";
-  $("phero").style.backgroundImage=`linear-gradient(180deg,rgba(0,0,0,.05),rgba(0,0,0,.4)),url(/img/${pt.image})`;
+  // —— 抵达实拍图：先黑场→换图→淡入缓推 + "已抵达"闪现 ——
+  const shot=$("shot"); shot.classList.remove("show");
+  $("pnameov").classList.remove("show");
+  const photo = pt.photo ? ("/photos/"+pt.photo) : ("/img/"+pt.image);
+  const im=new Image();
+  im.onload=()=>{
+    shot.style.backgroundImage=`url(${photo})`;
+    // 触发动画（强制 reflow 后加 show）
+    void shot.offsetWidth; shot.classList.add("show");
+    $("ovname").textContent=pt.name.replace(/（.*）/,""); $("overa").textContent=pt.era;
+    setTimeout(()=>$("pnameov").classList.add("show"),120);
+  };
+  im.src=photo;
+  $("pcap").textContent=pt.photo_caption||"";
+  const af=$("arriveflash"); af.classList.remove("go"); void af.offsetWidth; af.classList.add("go");
   $("pname").textContent=pt.name; $("pera").textContent=pt.era+" · "+pt.one_line;
   renderVers();
   $("qchips").innerHTML="";
@@ -363,6 +401,8 @@ function selectPoint(pid){
     c.onclick=()=>{ $("qinput").value=q; ask(); }; $("qchips").appendChild(c);
   });
   startNarration();
+  // 抵达即把点位卡滚到视野中心（demo/真机体验：走到→照片+讲解成为焦点）
+  setTimeout(()=>{ try{ $("pcard").scrollIntoView({behavior:"smooth",block:"center"}); }catch(e){} }, 220);
 }
 function renderVers(){
   $("vers").innerHTML="";
@@ -442,6 +482,105 @@ mic.addEventListener("mousedown",startRec); mic.addEventListener("mouseup",stopR
 mic.addEventListener("touchstart",e=>{e.preventDefault();startRec();}); mic.addEventListener("touchend",e=>{e.preventDefault();stopRec();});
 
 boot();
+
+// ============ 自动巡游演示（公开展示 / 录屏用：免手自走全流程） ============
+let autoRunning=false, autoAbort=false;
+const sleep=ms=>new Promise(r=>setTimeout(r,ms));
+// 等一次讲解播完（监听 status done），带兜底超时
+function waitNarration(maxMs=16000){
+  return new Promise(resolve=>{
+    let done=false;
+    const t0=Date.now();
+    const iv=setInterval(()=>{
+      const st=$("vbstate").textContent;
+      if(/讲完了|可追问/.test(st)){ done=true; clearInterval(iv); resolve("done"); }
+      else if(Date.now()-t0>maxMs){ clearInterval(iv); resolve("timeout"); }
+      if(autoAbort){ clearInterval(iv); resolve("abort"); }
+    },300);
+  });
+}
+async function autoTour(){
+  if(autoRunning){ autoAbort=true; return; }
+  autoRunning=true; autoAbort=false;
+  const btn=$("autobtn"); btn.textContent="■ 停止演示"; btn.style.background="#B23A2E";
+  try{
+    // 0) 选两个兴趣 → 展示 Memory 注入 + 路线重排
+    const wantInterests=["renwu","gengxin"];
+    for(const id of wantInterests){
+      const chip=[...$("chips").children].find(c=>c.textContent===(DATA.interests.find(x=>x.id===id)||{}).label);
+      if(chip && !selInterests.has(id)){ chip.click(); await sleep(700); }
+      if(autoAbort) throw 0;
+    }
+    await sleep(1200);
+    // 1) 巡游脚本：点位 + 该点演示的版本 + 可选追问
+    const script=[
+      {pid:"zhonghuamen",     ver:"normal"},
+      {pid:"zhonghuamen",     ver:"english"},                 // 同一处·切英文版（文化参照系）
+      {pid:"chengqiang_museum",ver:"deep",   ask:"物勒工名到底是怎么追责的？"},  // 深度版 + 追问
+      {pid:"laomendong",      ver:"normal"},
+      {pid:"xiaoxihu",        ver:"kids"},                    // 亲子版
+      {pid:"zhuque_qiao",     ver:"normal"},
+    ];
+    for(const step of script){
+      if(autoAbort) throw 0;
+      curVer=step.ver;
+      selectPoint(step.pid);                 // 触发抵达照片 + 讲解
+      await sleep(900);
+      await waitNarration();                 // 等讲解播完
+      if(autoAbort) throw 0;
+      if(step.ask){
+        $("qinput").value=step.ask; ask();   // 演示打断+追问+防幻觉
+        await sleep(900); await waitNarration(12000);
+      }
+      await sleep(1400);                      // 停顿让观众看清
+    }
+  }catch(e){}
+  autoRunning=false; autoAbort=false;
+  const btn2=$("autobtn"); btn2.textContent="▶ 自动巡游演示"; btn2.style.background="var(--green)";
+}
+$("autobtn").onclick=autoTour;
+// URL ?auto=1 → 页面加载后自动开始（无人值守公开展示 / 录屏）
+if(/[?&]auto=1/.test(location.search)){ setTimeout(()=>{ if(!autoRunning) autoTour(); }, 2600); }
+
+// ============ 录屏/演示渲染助手：直接注入预生成讲解文本（不打实时WS，避免限流） ============
+// 用于生成演示视频：每个 beat 把真实 LLM 讲解文本逐字"打字"进字幕，并点亮右侧 harness 链路。
+window.__demoNarrate=function(pid,ver,text){
+  curVer=ver;
+  const pt=DATA.points[pid], v=DATA.versions[ver];
+  // 复用 selectPoint 的抵达照片/版本/卡片，但不触发实时WS
+  curPoint=pid;
+  [...$("route").children].forEach(n=>n.classList.toggle("active", n.querySelector(".nm").textContent===pt.name.replace(/（.*）/,"")));
+  $("pcard").style.display="block";
+  const shot=$("shot"); shot.classList.remove("show"); $("pnameov").classList.remove("show");
+  const photo=pt.photo?("/photos/"+pt.photo):("/img/"+pt.image);
+  shot.style.backgroundImage=`url(${photo})`; void shot.offsetWidth; shot.classList.add("show");
+  $("ovname").textContent=pt.name.replace(/（.*）/,""); $("overa").textContent=pt.era;
+  setTimeout(()=>$("pnameov").classList.add("show"),120);
+  $("pcap").textContent=pt.photo_caption||"";
+  const af=$("arriveflash"); af.classList.remove("go"); void af.offsetWidth; af.classList.add("go");
+  $("pname").textContent=pt.name; $("pera").textContent=pt.era+" · "+pt.one_line;
+  renderVers();
+  // harness 链路点亮（与真实路径一致的事件流）
+  logEv("listen",`<b>走到「${pt.name}」</b> <span class="mono">GPS 触发 · ${v.label}</span>`);
+  fire("h2",true); hset("h2s","注入中"); logEv("inject",`<b>② 地理位置注入</b> 当前点位 = ${pt.name}（${pt.era}）`);
+  fire("h1",true); hset("h1s","注入中"); logEv("inject",`<b>① 策展数据注入</b> ${pt.facts.length} 条可信史实 → instructions`);
+  if(selInterests.size){ fire("h3",true); hset("h3s","注入中"); logEv("inject",`<b>③ Memory 注入</b> 兴趣偏好 + 历史追问`); }
+  logEv("model",`<b>session.update → response.create</b> <span class="mono">stepaudio-2.5-realtime</span>`);
+  $("techtag").textContent="讲解中"; hset("vbstate","正在讲解…"); $("wave").classList.add("live");
+  // 逐字打字字幕
+  $("subtitle").classList.remove("ph"); $("subtitle").textContent="";
+  let i=0; clearInterval(window.__typer);
+  logEv("audio",`<b>④ 语音流式播放</b> <span class="mono">response.audio.delta · PCM16 24k</span>`);
+  window.__typer=setInterval(()=>{
+    if(i<text.length){ $("subtitle").textContent+=text[i++]; $("subtitle").scrollTop=$("subtitle").scrollHeight; }
+    else{ clearInterval(window.__typer); $("wave").classList.remove("live"); hset("vbstate","讲完了 · 可追问/打断"); $("techtag").textContent="就绪"; fire("h1",false);fire("h2",false);fire("h3",false); }
+  }, 30);
+  setTimeout(()=>{ try{ $("pcard").scrollIntoView({behavior:"smooth",block:"center"}); }catch(e){} }, 220);
+};
+window.__demoAsk=function(q){
+  logEv("int",`<b>打断 + 追问</b> “${q}”`); fire("h3",true); hset("h3s","已记录");
+  logEv("inject",`<b>③ Memory</b> 记下这次追问`);
+};
 </script>
 </body>
 </html>

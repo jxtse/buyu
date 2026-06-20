@@ -128,7 +128,9 @@
           "note": "总结，提示下一站前往城墙博物馆方向",
           "text": "不过，中华门不只有明代城墙的气势，也有近现代历史留下来的沉重一笔。1937 年 12 月，这里是南京保卫战的主战场之一。中华门城顶原来是有城楼的，后来毁于侵华日军炮火，之后没有复建。所以你今天站在城台下往上看，会发现城墙还在，可城楼不在了。城楼后来没有被重新补上，反而让后来到这里的人，一眼就能看见：这座城门不只是经历过建造，也经历过战争和损毁。后来，南京城墙在 1988 年被列为全国重点文物保护单位。2006 年和 2012 年，以南京城墙为首的“中国明清城墙”联合申遗项目，两次被列入《中国世界遗产预备名单》。所以，中华门的价值，不只是“这座门很大”“这座城墙很厚”。它连着明代南京都城的格局，连着老城南的街巷和秦淮河，也连着南京这座城市关于防守、生活、战争和保护的记忆。你走到这里，看到的是一座城门；但听懂了它，看到的就是一整座南京城。"
         }
-      ]
+      ],
+      "photo": "zhonghuamen.jpg",
+      "photo_caption": "中华门瓮城 · 实拍"
     },
     "chengqiang_museum": {
       "name": "南京城墙博物馆",
@@ -168,7 +170,9 @@
       ],
       "observe": "在城砖列阵厅找一块铭文最密的砖，数数上面刻了几级责任人的名字。",
       "ask_back": "你猜：为什么朱元璋要让工匠把名字刻在砖上？",
-      "en_reference": "‘Wu Le Gong Ming’ — inscribe the maker’s name on the work — is a 600-year-old quality traceability system, the Ming equivalent of a product serial number and accountability chain."
+      "en_reference": "‘Wu Le Gong Ming’ — inscribe the maker’s name on the work — is a 600-year-old quality traceability system, the Ming equivalent of a product serial number and accountability chain.",
+      "photo": "chengqiang_museum.jpg",
+      "photo_caption": "南京城墙博物馆 · 实拍"
     },
     "laomendong": {
       "name": "老门东历史文化街区",
@@ -208,7 +212,9 @@
       ],
       "observe": "进牌坊后看脚下——镶着一块巨大的石雕古南京地图。",
       "ask_back": "你猜：‘箍桶巷’这个名字是怎么来的？",
-      "en_reference": "Laomendong is where ordinary Nanjingers actually lived for centuries — not a palace, but the living room of the old city: snack stalls, craft workshops, and lanes that still carry their Ming-era names."
+      "en_reference": "Laomendong is where ordinary Nanjingers actually lived for centuries — not a palace, but the living room of the old city: snack stalls, craft workshops, and lanes that still carry their Ming-era names.",
+      "photo": "laomendong.jpg",
+      "photo_caption": "老门东历史文化街区 · 实拍"
     },
     "xiaoxihu": {
       "name": "小西湖（共生院）",
@@ -248,7 +254,9 @@
       ],
       "observe": "看堆草巷的院墙——哪些是原来的实体墙、哪些被改成了镂空花墙。",
       "ask_back": "你猜：城市更新时，怎样才能让原住民愿意留下来、而不是被搬走？",
-      "en_reference": "Xiaoxihu is a UNESCO-awarded model of ‘regeneration without displacement’ — the opposite of bulldoze-and-rebuild gentrification: residents stayed, and the courtyards were renewed around their lives."
+      "en_reference": "Xiaoxihu is a UNESCO-awarded model of ‘regeneration without displacement’ — the opposite of bulldoze-and-rebuild gentrification: residents stayed, and the courtyards were renewed around their lives.",
+      "photo": "xiaoxihu.jpg",
+      "photo_caption": "小西湖共生院 · 实拍"
     },
     "zhuque_qiao": {
       "name": "朱雀桥 · 乌衣巷",
@@ -288,7 +296,9 @@
       ],
       "observe": "站在桥边读那首诗——想象 1200 年前刘禹锡也站在这里，看着同样的夕阳。",
       "ask_back": "你猜：诗里的‘燕子’，为什么是讲盛衰兴亡最妙的意象？",
-      "en_reference": "The swallows in this 9th-century poem are Nanjing’s ‘sic transit gloria mundi’ — Liu Yuxi standing where aristocratic dynasties vanished, much as Shelley’s traveler stood before Ozymandias."
+      "en_reference": "The swallows in this 9th-century poem are Nanjing’s ‘sic transit gloria mundi’ — Liu Yuxi standing where aristocratic dynasties vanished, much as Shelley’s traveler stood before Ozymandias.",
+      "photo": "zhuque_qiao.jpg",
+      "photo_caption": "乌衣巷 · 实拍"
     }
   },
   "versions": {

@@ -209,6 +209,8 @@ app = FastAPI(title="步语 BuYu · 老城南文化导览")
 app.mount("/static", StaticFiles(directory=str(HERE / "static")), name="static")
 # 复用 buyu 既有的点位配图（hero 图也软链过来）
 app.mount("/img", StaticFiles(directory=str(HERE / "static" / "img")), name="img")
+# 各点位真实实拍图（高德 POI 实拍 + 策展精选）——抵达点位时弹出
+app.mount("/photos", StaticFiles(directory=str(HERE / "static" / "photos")), name="photos")
 
 
 class NarrateReq(BaseModel):
