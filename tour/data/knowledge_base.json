@@ -1,0 +1,121 @@
+{
+  "route": {
+    "id": "laochengnan",
+    "name": "老城南线",
+    "name_en": "Old Southern City Route",
+    "city": "南京",
+    "summary": "从中华门到朱雀桥，一条线走完南京从东晋六朝到当代的1700年。",
+    "summary_en": "From Zhonghua Gate to Zhuque Bridge — 1700 years of Nanjing in one walk.",
+    "points": ["zhonghuamen", "chengqiang_museum", "laomendong", "xiaoxihu", "zhuque_qiao"]
+  },
+  "interests": [
+    {"id": "architecture", "label": "建筑形制", "label_en": "Architecture"},
+    {"id": "shijing", "label": "市井烟火", "label_en": "Street life"},
+    {"id": "renwu", "label": "名人故事", "label_en": "People & stories"},
+    {"id": "gengxin", "label": "城市更新", "label_en": "Urban renewal"},
+    {"id": "zhidu", "label": "制度文明", "label_en": "Institutions"}
+  ],
+  "points": {
+    "zhonghuamen": {
+      "name": "中华门（聚宝门）",
+      "name_en": "Zhonghua Gate (Jubao Gate)",
+      "era": "明 · 1366 起建",
+      "coord": [118.7782, 32.0083],
+      "image": "zhonghuamen.png",
+      "tags": ["architecture", "zhidu"],
+      "one_line": "世界最大的堡垒式瓮城，27 个藏兵洞可藏兵 3000。",
+      "facts": [
+        {"text": "中国现存规模最大的城门，世界上保存最完好、结构最复杂的堡垒式瓮城，誉“天下第一瓮城”。", "source": "我苏网/秦淮旅游；维基百科；百度百科"},
+        {"text": "东西宽 118.5 米、南北长 128 米，占地约 23 亩。", "source": "腾讯新闻 2020"},
+        {"text": "城堡内共 27 个藏兵洞（瓮城上下 13 + 左右马道 14），战时可藏兵 3000 人。", "source": "我苏网；百度百科"},
+        {"text": "原名“聚宝门”（正对城南聚宝山/雨花台），1931 年国民政府辟中华路后改名“中华门”。", "source": "我苏网/秦淮旅游"},
+        {"text": "所属南京明城墙 1366 年起建、历时 28 年，京城城墙现存 25.1 公里（2024），世界第一大城垣。", "source": "南京城墙博物馆资料"}
+      ],
+      "observe": "站在瓮城里抬头，看城墙上中层那七个最大的藏兵洞——最大的中洞据说能容千人。",
+      "ask_back": "你猜：敌人攻破第一道城门冲进瓮城后，会发生什么？",
+      "en_reference": "This barbican was built in 1366 — the same era Europe was still raising its Gothic cathedrals — yet it outscales almost every European city gate that survives."
+    },
+    "chengqiang_museum": {
+      "name": "南京城墙博物馆",
+      "name_en": "Nanjing City Wall Museum",
+      "era": "明 / 当代",
+      "coord": [118.7791, 32.0091],
+      "image": "citywall_brick.png",
+      "tags": ["zhidu", "architecture"],
+      "one_line": "城砖“物勒工名”——600 年前的产品质量追溯系统。",
+      "facts": [
+        {"text": "国内规模最大的城墙专题博物馆，总建筑面积约 1.3 万平方米，位于中华门瓮城附近。", "source": "新华网 2022"},
+        {"text": "城砖列阵厅 700 多块城砖铭文面朝外列阵；城砖规格长 40cm 宽 20cm 厚 10cm 重 20 公斤。", "source": "长江日报/中国江苏网 2023"},
+        {"text": "“物勒工名”责任制：每块砖刻产地+各级督造官吏+总甲/甲首/小甲+窑匠+造砖人夫姓名；责任层级一般九级，最多十一级，一块砖最多刻 79 字。", "source": "人民日报海外版 2022；南京城墙博物馆"},
+        {"text": "验收标准“敲之有声，断之无孔”；探访团成员形容城砖铭文“像现代的产品合格证”。", "source": "长江日报 2023"},
+        {"text": "2018 年起“砖文信息采集”项目用 GPS+无人机+三维激光扫描，采集 25 公里城墙、17 万余块铭文城砖建电子库，可按姓氏查与自己“沾亲带故”的城砖。", "source": "人民日报海外版 2022"}
+      ],
+      "observe": "在城砖列阵厅找一块铭文最密的砖，数数上面刻了几级责任人的名字。",
+      "ask_back": "你猜：为什么朱元璋要让工匠把名字刻在砖上？",
+      "en_reference": "‘Wu Le Gong Ming’ — inscribe the maker’s name on the work — is a 600-year-old quality traceability system, the Ming equivalent of a product serial number and accountability chain."
+    },
+    "laomendong": {
+      "name": "老门东历史文化街区",
+      "name_en": "Laomendong Historic Block",
+      "era": "明清 / 民国",
+      "coord": [118.7820, 32.0110],
+      "image": "xiaoxihu_alley.png",
+      "tags": ["shijing", "renwu"],
+      "one_line": "最金陵是城南，最城南是门东。",
+      "facts": [
+        {"text": "以中华门为界，门东/门西；三国东吴已形成行列式街道布局，明代中华门旁繁华商贸手工业集散地。", "source": "百度百科；携程游记"},
+        {"text": "2013 年 9 月 29 日修缮开放；7 条老街巷“非”字形布局，保留约 40% 原有建筑+街巷格局肌理。", "source": "百度百科"},
+        {"text": "2023 年年客流量 2200 万人次；2024 春节单日营收 2896 万元（同比 +55.2%）。", "source": "百度百科"},
+        {"text": "牌坊高 17 米，楹联“市井里巷尽染六朝烟水气，布衣将相共写千古大文章”，22 字道尽千年。", "source": "携程游记"},
+        {"text": "箍桶巷因沈万三家箍桶匠聚居得名；蒋百万（蒋寿山）故居“九十九间半”为省级文保。", "source": "百度百科"}
+      ],
+      "observe": "进牌坊后看脚下——镶着一块巨大的石雕古南京地图。",
+      "ask_back": "你猜：‘箍桶巷’这个名字是怎么来的？",
+      "en_reference": "Laomendong is where ordinary Nanjingers actually lived for centuries — not a palace, but the living room of the old city: snack stalls, craft workshops, and lanes that still carry their Ming-era names."
+    },
+    "xiaoxihu": {
+      "name": "小西湖（共生院）",
+      "name_en": "Xiaoxihu (Symbiotic Courtyards)",
+      "era": "当代",
+      "coord": [118.7835, 32.0122],
+      "image": "xiaoxihu_alley.png",
+      "tags": ["gengxin", "shijing"],
+      "one_line": "活着的城市更新——原住民留下来的“共生院”。",
+      "facts": [
+        {"text": "老城南核心区，占地 4.69 公顷，南京 28 处历史风貌区之一，留存历史街巷 7 条、历史建筑 7 处、传统院落 30 余处。", "source": "东南大学；江苏文明网"},
+        {"text": "2015 年启动“小尺度、渐进式”微更新，2019 年项目正式启动建设。", "source": "新华网 2024"},
+        {"text": "“共生院”：利用居民搬迁释放的空间增设功能设施、改善留住居民生活，同时植入新业态；“共享院”把封闭院落实体墙改镂空花墙变开放共享。", "source": "江苏文明网；新华网"},
+        {"text": "2022 年获联合国教科文组织亚太地区文化遗产保护奖，并入选住建部首批城市更新典型案例。", "source": "新华网；东南大学"},
+        {"text": "全过程人民民主：“五方平台”“社区规划师”“一房一策”；居民张德恕夫妇留住是代表案例。", "source": "新华网 2024"}
+      ],
+      "observe": "看堆草巷的院墙——哪些是原来的实体墙、哪些被改成了镂空花墙。",
+      "ask_back": "你猜：城市更新时，怎样才能让原住民愿意留下来、而不是被搬走？",
+      "en_reference": "Xiaoxihu is a UNESCO-awarded model of ‘regeneration without displacement’ — the opposite of bulldoze-and-rebuild gentrification: residents stayed, and the courtyards were renewed around their lives."
+    },
+    "zhuque_qiao": {
+      "name": "朱雀桥 · 乌衣巷",
+      "name_en": "Zhuque Bridge & Wuyi Alley",
+      "era": "东晋 / 六朝",
+      "coord": [118.7878, 32.0145],
+      "image": "swallow_wuyi.png",
+      "tags": ["renwu", "zhidu"],
+      "one_line": "旧时王谢堂前燕，飞入寻常百姓家。",
+      "facts": [
+        {"text": "刘禹锡《金陵五题·乌衣巷》（唐宝历二年 826 年作）：“朱雀桥边野草花，乌衣巷口夕阳斜。旧时王谢堂前燕，飞入寻常百姓家。”", "source": "百度百科；新华网学诗计划"},
+        {"text": "朱雀桥横跨秦淮河，六朝都城正南门（朱雀门）外大桥，当时车马来往交通要道；桥上曾有谢安所建铜雀重楼。", "source": "百度百科"},
+        {"text": "乌衣巷在秦淮河之南，与朱雀桥相近。三国吴禁军黑衣驻地得名；东晋王导、谢安两大世族居此，子弟称“乌衣郎”。", "source": "维基百科；香港教育局诵读材料"},
+        {"text": "主题是沧海桑田、盛衰兴亡；“旧时”“寻常”四字含无限今昔之感，白居易“掉头苦吟，叹赏良久”。", "source": "百度百科"},
+        {"text": "王谢=王导（琅琊王氏，东晋开国元勋）、谢安（陈郡谢氏，指挥淝水之战），六朝巨室。", "source": "百度百科"}
+      ],
+      "observe": "站在桥边读那首诗——想象 1200 年前刘禹锡也站在这里，看着同样的夕阳。",
+      "ask_back": "你猜：诗里的‘燕子’，为什么是讲盛衰兴亡最妙的意象？",
+      "en_reference": "The swallows in this 9th-century poem are Nanjing’s ‘sic transit gloria mundi’ — Liu Yuxi standing where aristocratic dynasties vanished, much as Shelley’s traveler stood before Ozymandias."
+    }
+  },
+  "versions": {
+    "normal":  {"label": "普通游客版", "label_en": "Tourist", "desc": "听一段好听的故事，轻松好懂", "style": "用讲故事的口吻，像一个热情的本地朋友带路，1-2 个生动细节即可，不堆术语。"},
+    "deep":    {"label": "深度历史版", "label_en": "Deep history", "desc": "制度、沿革、考据，讲透", "style": "面向历史/建筑爱好者，讲制度沿革、时代背景与考据，可引用具体年代与文献，信息密度高。"},
+    "kids":    {"label": "亲子科普版", "label_en": "For kids", "desc": "讲给孩子听的科普", "style": "面向带孩子的家庭，用孩子能懂的比喻和提问，把一个知识点讲清楚，语气活泼。"},
+    "english": {"label": "English", "label_en": "English", "desc": "为外国游客切换文化参照系", "style": "Write in English for a foreign visitor. Do NOT translate literally — switch to cultural reference points a Western visitor understands (compare to European history/landmarks where apt). Warm, vivid, concise."}
+  }
+}

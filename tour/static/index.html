@@ -1,0 +1,438 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>步语 BuYu · 实时语音文化导览</title>
+<style>
+:root{
+  --green:#1F7A5A; --green-d:#16614680; --green-l:#E8F4EF; --green-dd:#134E3A;
+  --ink:#1B2A24; --muted:#5C6B64; --line:#E7EDE9; --bg:#0C1410;
+  --tech-bg:#0E1A14; --tech-panel:#15241C; --tech-text:#CFE3D8; --tech-muted:#6E8579;
+  --gold:#C9A063; --warn:#E0A33D; --heal:#3FB6A8; --listen:#5AA9E6;
+  --card-sh:0 10px 30px rgba(15,40,28,.10);
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html,body{height:100%}
+body{font-family:-apple-system,"PingFang SC","Microsoft YaHei",sans-serif;
+  background:radial-gradient(1200px 700px at 16% -5%,#16352a 0%,#0C1410 62%);
+  min-height:100vh;display:flex;align-items:center;justify-content:center;gap:30px;padding:24px;flex-wrap:wrap}
+
+/* ============ 左：品牌词 ============ */
+.intro{max-width:250px;color:#E8F4EF}
+.intro .logo{font-size:13px;font-weight:800;color:var(--green);letter-spacing:1px}
+.intro h1{font-size:40px;font-weight:800;margin:2px 0 4px;color:#fff}
+.intro .en{color:var(--gold);font-style:italic;font-size:15px;margin-bottom:18px}
+.intro p{font-size:13px;line-height:1.75;color:#A9C2B6;border-left:3px solid var(--green);padding-left:13px;margin-bottom:18px}
+.intro .pill{display:inline-block;background:rgba(31,122,90,.18);color:#7FD3B3;border:1px solid var(--green);
+  border-radius:20px;padding:4px 11px;font-size:11.5px;margin:3px 4px 3px 0}
+
+/* ============ 中：手机 ============ */
+.phone{width:380px;height:824px;background:#F6FAF8;border-radius:40px;position:relative;
+  border:11px solid #0A0F0C;box-shadow:0 0 0 2px #000,0 34px 80px rgba(0,0,0,.55);overflow:hidden;display:flex;flex-direction:column;flex-shrink:0}
+.notch{position:absolute;top:9px;left:50%;transform:translateX(-50%);width:128px;height:26px;background:#0A0F0C;border-radius:16px;z-index:60}
+.statusbar{height:42px;display:flex;align-items:flex-end;justify-content:space-between;padding:0 22px 4px;font-size:12px;font-weight:600;color:var(--ink);flex-shrink:0}
+
+/* 顶栏 */
+.topbar{flex-shrink:0;padding:6px 18px 11px;background:linear-gradient(180deg,#fff,#fff 72%,rgba(255,255,255,0));border-bottom:1px solid var(--line);z-index:5}
+.topbar .r1{display:flex;align-items:baseline;gap:7px}
+.topbar h2{font-size:18px;color:var(--ink)}
+.topbar .en{font-size:10.5px;color:var(--green);font-style:italic}
+.topbar .sub{font-size:11px;color:var(--muted);margin-top:2px}
+.health{font-size:10px;margin-top:4px;display:flex;align-items:center;gap:5px;color:var(--muted)}
+.health .dot{width:7px;height:7px;border-radius:50%;background:#bbb}
+.health.on .dot{background:var(--green);box-shadow:0 0 0 3px rgba(31,122,90,.18)}
+.health b{color:var(--green-dd)}
+
+/* 滚动区 */
+.feed{flex:1;overflow-y:auto;padding:12px 15px 16px}
+.feed::-webkit-scrollbar{width:0}
+
+.sect{font-size:10.5px;font-weight:800;color:var(--green-dd);letter-spacing:.5px;margin:8px 2px 7px;display:flex;align-items:center;gap:6px}
+.sect::before{content:"";width:14px;height:2px;background:var(--green);border-radius:2px}
+
+/* 兴趣 chips */
+.chips{display:flex;flex-wrap:wrap;gap:6px;margin-bottom:6px}
+.chip{font-size:11.5px;padding:5px 11px;border-radius:15px;border:1px solid var(--line);background:#fff;color:var(--muted);cursor:pointer;transition:.14s}
+.chip.on{background:var(--green);color:#fff;border-color:var(--green)}
+
+/* 路线 node */
+.route{display:flex;gap:6px;overflow-x:auto;padding-bottom:8px;margin-bottom:4px}
+.route::-webkit-scrollbar{height:0}
+.node{flex-shrink:0;min-width:72px;background:#fff;border:1px solid var(--line);border-radius:12px;padding:8px 6px 9px;text-align:center;cursor:pointer;transition:.14s;position:relative}
+.node.active{border-color:var(--green);box-shadow:0 4px 14px rgba(31,122,90,.22);background:var(--green-l)}
+.node.hl::after{content:"★";position:absolute;top:-6px;right:-3px;font-size:11px;color:var(--gold)}
+.node .idx{width:22px;height:22px;border-radius:50%;background:var(--ink);color:#fff;font-size:11px;font-weight:700;display:flex;align-items:center;justify-content:center;margin:0 auto 5px}
+.node.active .idx{background:var(--green)}
+.node .nm{font-size:11px;font-weight:700;color:var(--ink);line-height:1.2}
+.node .er{font-size:9px;color:var(--green-dd);margin-top:2px}
+
+/* 点位卡 */
+.pcard{background:#fff;border:1px solid var(--line);border-radius:16px;overflow:hidden;margin-top:5px;box-shadow:var(--card-sh)}
+.phero{height:108px;background-size:cover;background-position:center;position:relative}
+.phero .gps{position:absolute;bottom:8px;left:9px;background:rgba(27,42,36,.82);color:#E8F4EF;font-size:10.5px;padding:4px 9px;border-radius:13px;backdrop-filter:blur(4px);display:flex;align-items:center;gap:5px}
+.phero .gps .pin{width:6px;height:6px;border-radius:50%;background:var(--listen);box-shadow:0 0 0 3px rgba(90,169,230,.35)}
+.pbody{padding:11px 14px 13px}
+.pbody h3{font-size:17px;color:var(--ink)}
+.pbody .era{font-size:11px;color:var(--green-dd);font-weight:600;margin:1px 0 9px}
+
+/* 版本切换 */
+.vers{display:flex;gap:5px;margin-bottom:11px;flex-wrap:wrap}
+.vbtn{flex:1;min-width:62px;font-size:11px;padding:6px 4px;border-radius:9px;border:1px solid var(--line);background:#F1F7F4;color:var(--muted);cursor:pointer;text-align:center;font-weight:600;transition:.14s}
+.vbtn.on{background:var(--ink);color:#fff;border-color:var(--ink)}
+
+/* 语音播放区 */
+.voicebox{background:linear-gradient(180deg,#11302440,#fff);border:1px solid #DCEAE3;border-radius:13px;padding:12px;margin-bottom:10px}
+.vb-head{display:flex;align-items:center;gap:8px;margin-bottom:9px}
+.vb-avatar{width:32px;height:32px;border-radius:50%;background:linear-gradient(145deg,var(--green),var(--green-dd));color:#fff;display:flex;align-items:center;justify-content:center;font-size:13px;font-weight:800;flex-shrink:0;box-shadow:0 5px 14px rgba(31,122,90,.3)}
+.vb-meta{flex:1;min-width:0}
+.vb-name{font-size:12.5px;font-weight:800;color:var(--ink)}
+.vb-state{font-size:10px;color:var(--muted)}
+.wave{display:flex;align-items:center;gap:2.5px;height:30px;margin:4px 0 9px}
+.wave i{width:3px;background:var(--green);border-radius:2px;height:5px;opacity:.5}
+.wave.live i{animation:wv .9s ease-in-out infinite}
+.wave.live i:nth-child(2n){animation-duration:.7s}.wave.live i:nth-child(3n){animation-duration:1.1s}
+@keyframes wv{0%,100%{height:5px;opacity:.45}50%{height:26px;opacity:1}}
+.subtitle{font-size:13.5px;line-height:1.66;color:var(--ink);height:90px;max-height:90px;overflow-y:auto;white-space:pre-wrap}
+.subtitle::-webkit-scrollbar{width:0}
+.subtitle.ph{color:var(--muted)}
+.kb-badge{display:inline-flex;align-items:center;gap:4px;font-size:9.5px;font-weight:700;color:var(--green-dd);background:var(--green-l);border-radius:9px;padding:2px 8px;margin-top:8px}
+
+/* 控制条 */
+.controls{display:flex;gap:8px;align-items:center}
+.mic{flex:1;display:flex;align-items:center;justify-content:center;gap:7px;background:var(--green);color:#fff;border:none;border-radius:22px;padding:11px;font-size:13px;font-weight:700;cursor:pointer;transition:.14s}
+.mic:active{transform:scale(.97)}
+.mic.rec{background:var(--warn)}
+.mic svg{width:16px;height:16px}
+.iconbtn{width:42px;height:42px;border-radius:50%;border:1px solid var(--line);background:#fff;color:var(--muted);cursor:pointer;font-size:15px;display:flex;align-items:center;justify-content:center}
+.iconbtn:active{transform:scale(.94)}
+
+/* 追问 */
+.askrow{display:flex;gap:6px;margin-top:9px}
+.askrow input{flex:1;border:1px solid var(--line);border-radius:18px;padding:8px 13px;font-size:12.5px;outline:none}
+.askrow input:focus{border-color:var(--green)}
+.askrow button{border:none;background:var(--green-dd);color:#fff;border-radius:18px;padding:0 15px;font-size:12.5px;cursor:pointer;font-weight:600}
+.qchips{display:flex;gap:5px;flex-wrap:wrap;margin-top:7px}
+.qchip{font-size:10.5px;color:var(--muted);background:#fff;border:1px solid var(--line);border-radius:12px;padding:3px 9px;cursor:pointer}
+
+/* ============ 右：实时 harness 链路面板 ============ */
+.tech{width:330px;height:824px;background:var(--tech-bg);border-radius:24px;display:flex;flex-direction:column;overflow:hidden;border:1px solid #1d3328;flex-shrink:0;box-shadow:0 30px 70px rgba(0,0,0,.4)}
+.tech-head{padding:18px 18px 12px;border-bottom:1px solid #1d3328}
+.tech-head .t1{display:flex;align-items:center;gap:8px}
+.tech-head .ld{width:8px;height:8px;border-radius:50%;background:var(--heal);box-shadow:0 0 0 3px rgba(63,182,168,.2)}
+.tech-head h3{font-size:14px;color:#E8F4EF;font-weight:700}
+.tech-head .tag{margin-left:auto;font-size:10px;color:var(--tech-muted);border:1px solid #294a3a;border-radius:10px;padding:2px 8px}
+.tech-head .sub{font-size:11px;color:var(--tech-muted);margin-top:6px;line-height:1.5}
+.model-chip{margin-top:9px;display:flex;align-items:center;gap:7px;background:#11241b;border:1px solid #28493a;border-radius:9px;padding:7px 10px}
+.model-chip .mi{width:24px;height:24px;border-radius:6px;background:var(--green);color:#fff;display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:800}
+.model-chip .mt b{font-size:11.5px;color:#E8F4EF;display:block}
+.model-chip .mt span{font-size:9.5px;color:var(--tech-muted)}
+.model-chip .frozen{margin-left:auto;font-size:9px;color:var(--gold);border:1px solid #5a4a2a;border-radius:8px;padding:2px 6px}
+
+/* harness 三件套 */
+.harness{padding:12px 16px 6px}
+.h-row{display:flex;align-items:center;gap:9px;padding:8px 10px;border-radius:10px;background:#13241b;border:1px solid #21402f;margin-bottom:7px;transition:.2s}
+.h-row.fire{border-color:var(--green);background:#163326;box-shadow:0 0 0 1px var(--green)}
+.h-ic{width:26px;height:26px;border-radius:7px;display:flex;align-items:center;justify-content:center;font-size:13px;flex-shrink:0}
+.h-1 .h-ic{background:rgba(201,160,99,.16);color:var(--gold)}
+.h-2 .h-ic{background:rgba(90,169,230,.16);color:var(--listen)}
+.h-3 .h-ic{background:rgba(63,182,168,.16);color:var(--heal)}
+.h-tx{flex:1;min-width:0}
+.h-tx b{font-size:11.5px;color:#E8F4EF;display:block}
+.h-tx span{font-size:9.5px;color:var(--tech-muted)}
+.h-st{font-size:9px;color:var(--tech-muted)}
+.h-row.fire .h-st{color:var(--green)}
+
+/* 实时事件流 */
+.log{flex:1;overflow-y:auto;padding:6px 16px 14px}
+.log::-webkit-scrollbar{width:0}
+.logitem{display:grid;grid-template-columns:16px 1fr;gap:8px;margin-bottom:9px;animation:up .3s ease both}
+.logitem .lc{width:9px;height:9px;border-radius:50%;margin-top:3px}
+.lc-listen{background:var(--listen)}.lc-inject{background:var(--gold)}.lc-model{background:var(--green)}
+.lc-audio{background:var(--heal)}.lc-int{background:var(--warn)}
+.logitem .lt{font-size:11px;color:var(--tech-text);line-height:1.5}
+.logitem .lt b{color:#fff}
+.logitem .lt .mono{font-size:9.5px;color:var(--tech-muted);font-family:ui-monospace,Menlo,monospace}
+@keyframes up{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:none}}
+.tech-foot{padding:9px 16px;border-top:1px solid #1d3328;display:flex;gap:13px}
+.tech-foot .lg{display:flex;align-items:center;gap:5px;font-size:9.5px;color:var(--tech-muted)}
+.tech-foot .lg i{width:8px;height:8px;border-radius:2px}
+</style>
+</head>
+<body>
+<div class="intro">
+  <div class="logo">步语 BuYu</div>
+  <h1>会说话的<br>历史现场</h1>
+  <div class="en">Walk the Story of a City</div>
+  <p>不是又一个录音讲解器。一个<b style="color:#7FD3B3">冻结的实时语音模型</b>，加一套文旅 <b style="color:#7FD3B3">Harness</b>：策展数据 · 地理位置 · Memory。走到哪、讲到哪，随时打断、随时追问。</p>
+  <div>
+    <span class="pill">实时语音 · 可打断</span>
+    <span class="pill">同一处 · 四种讲法</span>
+    <span class="pill">策展数据防幻觉</span>
+    <span class="pill">记得你是谁</span>
+  </div>
+  <p style="border-left-color:var(--gold);color:#C9B488;font-size:11.5px">右侧面板 = 实时 Harness 链路。每次讲解都能看到语音模型在「听 → 注入三件套 → 开口 → 被打断」。</p>
+</div>
+
+<!-- 手机 -->
+<div class="phone">
+  <div class="notch"></div>
+  <div class="statusbar"><span>9:41</span><span>步语 · 老城南</span><span>●●●</span></div>
+  <div class="topbar">
+    <div class="r1"><h2>老城南线</h2><span class="en">Old Southern City</span></div>
+    <div class="sub">从中华门到朱雀桥 · 一条线走完南京 1700 年</div>
+    <div class="health" id="health"><span class="dot"></span><span id="healthtx">连接实时语音引擎…</span></div>
+  </div>
+  <div class="feed">
+    <div class="sect">选兴趣 · 让讲解记得你爱听什么</div>
+    <div class="chips" id="chips"></div>
+
+    <div class="sect">路线 · 点一个点位 = 模拟走到（GPS 触发讲解）</div>
+    <div class="route" id="route"></div>
+
+    <div class="pcard" id="pcard" style="display:none">
+      <div class="phero" id="phero"><div class="gps"><span class="pin"></span> 已抵达 · GPS 触发讲解</div></div>
+      <div class="pbody">
+        <h3 id="pname"></h3>
+        <div class="era" id="pera"></div>
+        <div class="vers" id="vers"></div>
+
+        <div class="voicebox">
+          <div class="vb-head">
+            <div class="vb-avatar">步</div>
+            <div class="vb-meta"><div class="vb-name">步语导览员</div><div class="vb-state" id="vbstate">待命</div></div>
+            <div class="kb-badge">✓ 策展知识库锚定</div>
+          </div>
+          <div class="wave" id="wave"></div>
+          <div class="subtitle ph" id="subtitle">点上方版本，或点路线点位，听实时语音讲解…</div>
+        </div>
+
+        <div class="controls">
+          <button class="mic" id="mic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2a3 3 0 0 0-3 3v6a3 3 0 0 0 6 0V5a3 3 0 0 0-3-3z"/><path d="M19 10v1a7 7 0 0 1-14 0v-1M12 18v4"/></svg><span id="mictx">按住说话（可打断）</span></button>
+          <button class="iconbtn" id="stopbtn" title="打断">✕</button>
+        </div>
+
+        <div class="askrow">
+          <input id="qinput" placeholder="也可以打字追问，例如：藏兵洞是干嘛的？"/>
+          <button id="qbtn">问</button>
+        </div>
+        <div class="qchips" id="qchips"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- 右：实时 harness 链路面板 -->
+<aside class="tech">
+  <div class="tech-head">
+    <div class="t1"><span class="ld"></span><h3>实时 Harness 链路</h3><span class="tag" id="techtag">待命</span></div>
+    <div class="sub">冻结的实时语音模型 + 文旅 Harness。每次讲解的内部步骤实时展开。</div>
+    <div class="model-chip">
+      <div class="mi">阶</div>
+      <div class="mt"><b id="modelname">Step-Audio 2.5 Realtime</b><span>端到端实时语音 · 全双工可打断</span></div>
+      <span class="frozen">FROZEN</span>
+    </div>
+  </div>
+  <div class="harness">
+    <div class="h-row h-1" id="h1"><div class="h-ic">📚</div><div class="h-tx"><b>① 策展数据</b><span>人工把关的可信知识库 · 防幻觉</span></div><div class="h-st" id="h1s">就绪</div></div>
+    <div class="h-row h-2" id="h2"><div class="h-ic">📍</div><div class="h-tx"><b>② 地理位置</b><span>走到哪 · 注入当前点位上下文</span></div><div class="h-st" id="h2s">就绪</div></div>
+    <div class="h-row h-3" id="h3"><div class="h-ic">🧠</div><div class="h-tx"><b>③ Memory</b><span>记住兴趣 · 问过什么 · 走过哪</span></div><div class="h-st" id="h3s">就绪</div></div>
+  </div>
+  <div class="sect" style="color:var(--tech-muted);padding:4px 16px 2px;font-size:10px">实时事件流</div>
+  <div class="log" id="log"></div>
+  <div class="tech-foot">
+    <div class="lg"><i style="background:var(--listen)"></i>听</div>
+    <div class="lg"><i style="background:var(--gold)"></i>注入</div>
+    <div class="lg"><i style="background:var(--green)"></i>模型</div>
+    <div class="lg"><i style="background:var(--heal)"></i>语音</div>
+    <div class="lg"><i style="background:var(--warn)"></i>打断</div>
+  </div>
+</aside>
+
+<script>
+const $=id=>document.getElementById(id);
+const SID="s"+Math.random().toString(36).slice(2,9);
+let DATA=null, curPoint=null, curVer="normal", selInterests=new Set();
+let ws=null, ac=null, playHead=0, recording=false, mediaRec=null, firstAudio=false;
+window.__cap=[];  // demo 录制用：记录每段 PCM 及其计划播放时刻（相对页面加载）
+
+// ---- Web Audio：播放 Step-Audio 流式 PCM16(24k) ----
+function ensureAC(){ if(!ac){ ac=new (window.AudioContext||window.webkitAudioContext)({sampleRate:24000}); playHead=ac.currentTime; } }
+function playPCM(b64){
+  ensureAC();
+  const raw=atob(b64); const buf=new Int16Array(raw.length/2);
+  const dv=new DataView(new ArrayBuffer(raw.length));
+  for(let i=0;i<raw.length;i++) dv.setUint8(i,raw.charCodeAt(i));
+  for(let i=0;i<buf.length;i++) buf[i]=dv.getInt16(i*2,true);
+  const f32=new Float32Array(buf.length); for(let i=0;i<buf.length;i++) f32[i]=buf[i]/32768;
+  const ab=ac.createBuffer(1,f32.length,24000); ab.getChannelData(0).set(f32);
+  const src=ac.createBufferSource(); src.buffer=ab; src.connect(ac.destination);
+  const t=Math.max(ac.currentTime,playHead); src.start(t); playHead=t+ab.duration;
+  try{ window.__cap.push({at:(performance.now()/1000), pcm:b64}); }catch(e){}
+}
+function stopAudio(){ if(ac){ try{ac.close();}catch(e){} ac=null; } }
+
+// ---- 右面板事件流 ----
+function logEv(cls,html){
+  const el=document.createElement("div"); el.className="logitem";
+  el.innerHTML=`<div class="lc lc-${cls}"></div><div class="lt">${html}</div>`;
+  $("log").prepend(el);
+  while($("log").children.length>40) $("log").lastChild.remove();
+}
+function fire(id,on){ $(id).classList.toggle("fire",on); }
+function hset(id,t){ $(id).textContent=t; }
+
+async function boot(){
+  DATA=await (await fetch("/api/route")).json();
+  renderInterests(); renderRoute(DATA.route.points);
+  const h=await (await fetch("/api/health")).json();
+  if(h.voice){ $("health").classList.add("on"); $("healthtx").innerHTML='实时语音引擎在线 · <b>'+(h.voice_model||'Step-Audio')+'</b>'; $("modelname").textContent="Step-Audio 2.5 Realtime"; }
+  else { $("healthtx").innerHTML='语音引擎离线（缺 STEP_API_KEY）'; }
+  connectWS();
+  selectPoint(DATA.route.points[0]);
+}
+
+function connectWS(){
+  ws=new WebSocket((location.protocol==="https:"?"wss":"ws")+"://"+location.host+"/ws/voice");
+  ws.onmessage=e=>{
+    const m=JSON.parse(e.data);
+    if(m.kind==="transcript"){
+      if($("subtitle").classList.contains("ph")){ $("subtitle").classList.remove("ph"); $("subtitle").textContent=""; }
+      $("subtitle").textContent+=m.text; $("subtitle").scrollTop=$("subtitle").scrollHeight;
+    } else if(m.kind==="audio"){
+      playPCM(m.pcm);
+      if(!firstAudio){ firstAudio=true; logEv("audio",`<b>④ 语音流式播放</b> <span class="mono">response.audio.delta · PCM16 24k</span>`); $("wave").classList.add("live"); hset("vbstate","正在讲解…"); }
+    } else if(m.kind==="status"){
+      $("techtag").textContent=m.status==="speaking"?"讲解中":"就绪";
+      if(m.status==="done"){ $("wave").classList.remove("live"); hset("vbstate","讲完了 · 可追问/打断"); fire("h1",false);fire("h2",false);fire("h3",false); }
+    } else if(m.kind==="error"){
+      logEv("int",`<b style="color:#E0A33D">错误</b> <span class="mono">${(m.error&&m.error.message)||''}</span>`);
+    }
+  };
+  ws.onclose=()=>setTimeout(connectWS,1500);
+}
+
+function renderInterests(){
+  $("chips").innerHTML="";
+  DATA.interests.forEach(it=>{
+    const c=document.createElement("div"); c.className="chip"; c.textContent=it.label;
+    c.onclick=()=>{
+      if(selInterests.has(it.id)){selInterests.delete(it.id);c.classList.remove("on");}
+      else{selInterests.add(it.id);c.classList.add("on");}
+      if(ws&&ws.readyState===1) ws.send(JSON.stringify({kind:"set_interest",session_id:SID,interests:[...selInterests]}));
+      fire("h3",true); hset("h3s","已更新"); logEv("inject",`<b>③ Memory 更新</b> 兴趣 = ${[...selInterests].map(i=>DATA.interests.find(x=>x.id===i).label).join("、")||"（无）"}`);
+      reorder();
+    };
+    $("chips").appendChild(c);
+  });
+}
+async function reorder(){
+  const rec=await (await fetch("/api/recommend",{method:"POST",headers:{"content-type":"application/json"},body:JSON.stringify({interests:[...selInterests]})})).json();
+  renderRoute(rec.ordered,new Set(rec.highlight));
+}
+function renderRoute(order,hl){
+  hl=hl||new Set(); $("route").innerHTML="";
+  order.forEach((pid,i)=>{
+    const pt=DATA.points[pid];
+    const n=document.createElement("div");
+    n.className="node"+(pid===curPoint?" active":"")+(hl.has(pid)?" hl":"");
+    n.innerHTML=`<div class="idx">${i+1}</div><div class="nm">${pt.name.replace(/（.*）/,"")}</div><div class="er">${pt.era.split(" ")[0]}</div>`;
+    n.onclick=()=>selectPoint(pid);
+    $("route").appendChild(n);
+  });
+}
+function selectPoint(pid){
+  curPoint=pid; const pt=DATA.points[pid];
+  [...$("route").children].forEach(n=>n.classList.toggle("active", n.querySelector(".nm").textContent===pt.name.replace(/（.*）/,"")));
+  $("pcard").style.display="block";
+  $("phero").style.backgroundImage=`linear-gradient(180deg,rgba(0,0,0,.05),rgba(0,0,0,.4)),url(/img/${pt.image})`;
+  $("pname").textContent=pt.name; $("pera").textContent=pt.era+" · "+pt.one_line;
+  renderVers();
+  $("qchips").innerHTML="";
+  [pt.ask_back,"这里为什么重要？","有什么必看的？"].forEach(q=>{
+    const c=document.createElement("div"); c.className="qchip"; c.textContent=q;
+    c.onclick=()=>{ $("qinput").value=q; ask(); }; $("qchips").appendChild(c);
+  });
+  startNarration();
+}
+function renderVers(){
+  $("vers").innerHTML="";
+  Object.entries(DATA.versions).forEach(([k,v])=>{
+    const b=document.createElement("div"); b.className="vbtn"+(k===curVer?" on":"");
+    b.textContent=v.label; b.onclick=()=>{ curVer=k; renderVers(); startNarration(); };
+    $("vers").appendChild(b);
+  });
+}
+
+function startNarration(){
+  if(!ws||ws.readyState!==1){ setTimeout(startNarration,400); return; }
+  stopAudio(); firstAudio=false;
+  $("subtitle").classList.add("ph"); $("subtitle").textContent="正在接通实时语音…";
+  hset("vbstate","接通中…"); $("techtag").textContent="启动会话";
+  const pt=DATA.points[curPoint], v=DATA.versions[curVer];
+  // 右面板：harness 三步点亮
+  logEv("listen",`<b>走到「${pt.name}」</b> <span class="mono">GPS 触发 · ${v.label}</span>`);
+  fire("h2",true); hset("h2s","注入中"); logEv("inject",`<b>② 地理位置注入</b> 当前点位 = ${pt.name}（${pt.era}）`);
+  fire("h1",true); hset("h1s","注入中"); logEv("inject",`<b>① 策展数据注入</b> ${pt.facts.length} 条可信史实 → instructions`);
+  if(selInterests.size){ fire("h3",true); hset("h3s","注入中"); logEv("inject",`<b>③ Memory 注入</b> 兴趣偏好 + 历史追问`); }
+  logEv("model",`<b>session.update → response.create</b> <span class="mono">stepaudio-2.5-realtime</span>`);
+  ws.send(JSON.stringify({kind:"start",session_id:SID,point_id:curPoint,version:curVer}));
+}
+
+function ask(){
+  const q=$("qinput").value.trim(); if(!q||!ws||ws.readyState!==1) return;
+  $("qinput").value="";
+  stopAudio(); firstAudio=false;
+  logEv("int",`<b>打断 + 追问</b> “${q}”`); fire("h3",true); hset("h3s","已记录");
+  logEv("inject",`<b>③ Memory</b> 记下这次追问`);
+  hset("vbstate","正在回答…"); $("subtitle").classList.add("ph"); $("subtitle").textContent="…";
+  ws.send(JSON.stringify({kind:"ask",session_id:SID,text:q}));
+}
+$("qbtn").onclick=ask;
+$("qinput").addEventListener("keydown",e=>{if(e.key==="Enter")ask();});
+
+// 打断按钮
+$("stopbtn").onclick=()=>{
+  if(ws&&ws.readyState===1) ws.send(JSON.stringify({kind:"interrupt"}));
+  stopAudio(); $("wave").classList.remove("live"); hset("vbstate","已打断");
+  logEv("int",`<b>用户打断</b> <span class="mono">response.cancel</span>`);
+};
+
+// 麦克风：按住说话 → PCM16 上传 → commit
+const mic=$("mic");
+async function startRec(){
+  try{
+    ensureAC();
+    const stream=await navigator.mediaDevices.getUserMedia({audio:{channelCount:1,sampleRate:24000}});
+    const src=ac.createMediaStreamSource(stream);
+    const proc=ac.createScriptProcessor(4096,1,1);
+    src.connect(proc); proc.connect(ac.destination);
+    mediaRec={stream,proc,src};
+    recording=true; mic.classList.add("rec"); $("mictx").textContent="松开结束";
+    logEv("listen",`<b>① 麦克风采音</b> <span class="mono">input_audio_buffer.append PCM16</span>`); fire("h2",true);
+    if(ws&&ws.readyState===1) ws.send(JSON.stringify({kind:"interrupt"}));
+    proc.onaudioprocess=e=>{
+      if(!recording) return;
+      const inp=e.inputBuffer.getChannelData(0);
+      const pcm=new Int16Array(inp.length);
+      for(let i=0;i<inp.length;i++){ const s=Math.max(-1,Math.min(1,inp[i])); pcm[i]=s<0?s*32768:s*32767; }
+      let bin=""; const u8=new Uint8Array(pcm.buffer); for(let i=0;i<u8.length;i++) bin+=String.fromCharCode(u8[i]);
+      if(ws&&ws.readyState===1) ws.send(JSON.stringify({kind:"audio",pcm:btoa(bin)}));
+    };
+  }catch(err){ logEv("int",`<b style="color:#E0A33D">麦克风不可用</b> ${err.message} —— 可改用下方打字追问`); }
+}
+function stopRec(){
+  if(!recording) return; recording=false; mic.classList.remove("rec"); $("mictx").textContent="按住说话（可打断）";
+  if(mediaRec){ try{mediaRec.proc.disconnect();mediaRec.src.disconnect();mediaRec.stream.getTracks().forEach(t=>t.stop());}catch(e){} mediaRec=null; }
+  stopAudio(); firstAudio=false;
+  logEv("model",`<b>提交语音 → 生成回应</b> <span class="mono">input_audio_buffer.commit</span>`);
+  hset("vbstate","正在回答…");
+  if(ws&&ws.readyState===1) ws.send(JSON.stringify({kind:"commit"}));
+}
+mic.addEventListener("mousedown",startRec); mic.addEventListener("mouseup",stopRec); mic.addEventListener("mouseleave",()=>recording&&stopRec());
+mic.addEventListener("touchstart",e=>{e.preventDefault();startRec();}); mic.addEventListener("touchend",e=>{e.preventDefault();stopRec();});
+
+boot();
+</script>
+</body>
+</html>
