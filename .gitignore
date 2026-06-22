@@ -1,0 +1,6 @@
+# Local browser export artifacts
+.chrome-export-profile/
+.edge-export-profile/
+
+# Independent repository tracked separately
+buyu/

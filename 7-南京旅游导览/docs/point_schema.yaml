@@ -1,0 +1,78 @@
+# 点位配置数据结构示例
+# 可复制为 examples/your_stop.yaml 后填写。
+
+route_name: 路线名称
+stop_name: 点位名称
+location_note: 点位位置说明，帮助撰稿人理解游客站在哪里。
+
+source_materials:
+  - id: source_001
+    title: 来源标题
+    type: local_text
+    path: data/raw/example.txt
+    url: 可选，网页地址。建议仍把正文粘贴到 data/raw/
+    usage_note: 来源使用说明，例如“仅调研参考”或“可引用”。
+
+verified_facts:
+  - claim: 已核实的事实陈述
+    source_ids: source_001
+    confidence: high
+
+story_angles:
+  - 可讲述角度 1
+  - 可讲述角度 2
+
+target_audience: 默认目标受众
+duration: 默认时长
+language: zh-CN
+tone: 默认语气
+
+script_versions:
+  - id: normal_3min
+    label: 普通版 3 分钟
+    target_audience: 初次到访南京的普通游客
+    duration: 3分钟
+    language: zh-CN
+    tone: 清晰、亲切、适合边走边听
+  - id: family_3min
+    label: 亲子版 3 分钟
+    target_audience: 带孩子游览的家庭
+    duration: 3分钟
+    language: zh-CN
+    tone: 轻松、互动、少术语
+  - id: fun_3min
+    label: 趣味版 3 分钟
+    target_audience: 喜欢故事和冷知识的年轻游客
+    duration: 3分钟
+    language: zh-CN
+    tone: 有节奏、有悬念、但不夸张
+  - id: expert_5min
+    label: 专业版 5 分钟
+    target_audience: 对历史建筑和城市史感兴趣的游客
+    duration: 5分钟
+    language: zh-CN
+    tone: 稍专业、信息密度更高、引用意识明确
+  - id: english_3min
+    label: 英文版 3 分钟
+    target_audience: English-speaking visitors
+    duration: 3 minutes
+    language: en
+    tone: Clear, vivid, accessible, suitable for audio touring
+
+script_output:
+  normal_3min: outputs/scripts/example_normal_3min.md
+  family_3min: outputs/scripts/example_family_3min.md
+  fun_3min: outputs/scripts/example_fun_3min.md
+  expert_5min: outputs/scripts/example_expert_5min.md
+  english_3min: outputs/scripts/example_english_3min.md
+
+uncertain_claims:
+  - claim: 需要核查的说法
+    reason: 为什么不能直接当事实使用
+    review_label: 需人工核查
+
+citations:
+  - source_id: source_001
+    citation_note: 来源引用方式，例如机构名、文章名、URL、发布日期。
+
+human_review_status: draft

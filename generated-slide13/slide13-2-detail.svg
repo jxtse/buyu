@@ -1,0 +1,169 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="680" height="1474" viewBox="0 0 680 1474">
+  <defs>
+    <filter id="paper" x="-10%" y="-10%" width="120%" height="120%">
+      <feColorMatrix in="SourceGraphic" type="matrix" values="1 0 0 0 0  0 1 0 0 0  0 0 1 0 0  0 0 0 1 0"/>
+    </filter>
+    <filter id="pencil" x="-20%" y="-20%" width="140%" height="140%">
+      <feTurbulence type="fractalNoise" baseFrequency=".045" numOctaves="3" seed="4" result="n"/>
+      <feDisplacementMap in="SourceGraphic" in2="n" scale="1.8"/>
+    </filter>
+    <style>
+      .ui{font-family:"Noto Sans SC","PingFang SC","Microsoft YaHei",sans-serif;fill:#171b22}
+      .en{font-family:"Inter","Helvetica Neue",Arial,sans-serif}
+      .hand{font-family:"Noto Sans SC","PingFang SC","Microsoft YaHei",sans-serif;fill:#263038}
+      .thin{stroke:#252b2d;stroke-width:4;stroke-linecap:round;stroke-linejoin:round;fill:none}
+      .route{stroke:#1f7a5a;stroke-width:11;stroke-linecap:round;stroke-linejoin:round;fill:none;stroke-dasharray:20 15;filter:url(#pencil)}
+      .routeSolid{stroke:#1f7a5a;stroke-width:12;stroke-linecap:round;stroke-linejoin:round;fill:none;filter:url(#pencil)}
+      .label{fill:#fffdf8;stroke:#d8a86f;stroke-width:2}
+      .chip{fill:#dff3d5}
+      .muted{fill:#687078}
+    </style>
+    
+  </defs>
+  <rect width="680" height="1474" fill="#fffdf8"/>
+  <path d="M-20 265 C120 330 245 205 398 283 S570 220 708 276" stroke="#e8d4ff" stroke-width="18" fill="none" opacity=".75" filter="url(#pencil)"/>
+  <text x="64" y="50" class="ui en" font-size="28" font-weight="700">9:41</text>
+  <g transform="translate(548 31)" fill="#111">
+    <rect x="0" y="16" width="7" height="15" rx="2"/><rect x="12" y="10" width="7" height="21" rx="2"/><rect x="24" y="4" width="7" height="27" rx="2"/>
+    <path d="M52 14 q18 -15 36 0" stroke="#111" stroke-width="5" fill="none"/><path d="M59 22 q11 -9 22 0" stroke="#111" stroke-width="5" fill="none"/>
+    <rect x="99" y="4" width="38" height="22" rx="4" fill="none" stroke="#111" stroke-width="4"/><rect x="103" y="8" width="28" height="14" rx="2"/>
+  </g>
+    <path d="M48 126 l-20 22 20 22" class="thin"/>
+  <text x="340" y="150" class="ui" font-size="35" font-weight="700" text-anchor="middle">路线详情</text>
+  <g transform="translate(24 210)">
+    <rect x="0" y="0" width="632" height="620" rx="16" fill="#fbf4e7" filter="url(#paper)"/>
+    <svg x="0" y="0" width="632" height="620" viewBox="0 0 680 1474" preserveAspectRatio="xMidYMid slice"><rect x="0" y="0" width="680" height="1474" fill="#fbf4e7"/>
+<g opacity=".24" filter="url(#pencil)">
+  <path d="M20 0 C210 130 120 280 302 430 S460 760 288 1010 S250 1260 550 1474" stroke="#d7b889" stroke-width="10" fill="none" stroke-dasharray="7 14"/>
+  <path d="M-20 1120 C130 1030 285 1108 420 1010 S558 900 710 956" stroke="#d7b889" stroke-width="8" fill="none" stroke-dasharray="6 16"/>
+</g>
+<g transform="translate(28 60)">
+  <rect x="0" y="0" width="455" height="82" rx="10" fill="#fffdf8" opacity=".88" stroke="#d8a86f" stroke-width="1.5"/>
+  <text x="20" y="42" class="ui" font-size="34">步语 · 老城南线</text>
+  <text x="21" y="64" class="ui en" font-size="16" fill="#1f7a5a">BuYu · Walk the Story of a City</text>
+</g>
+<g transform="translate(520 50)">
+  <text x="56" y="0" class="ui en" font-size="24" text-anchor="middle">N</text>
+  <circle cx="56" cy="44" r="25" fill="#fffdf8" stroke="#d8a86f"/>
+  <path d="M56 15 l8 28 h-16z" fill="#9d4d3f"/><path d="M56 73 l-8 -28 h16z" fill="#4a5360"/>
+</g>
+<path class="route" d="M66 886 C162 858 160 934 236 900 S317 945 376 914 S456 902 497 958 S449 1052 516 1084 S585 1183 501 1243"/>
+<path class="route" d="M497 958 C498 814 438 760 454 662 S547 566 501 454 S530 336 610 245"/>
+<g transform="translate(48 710) scale(0.92)" filter="url(#pencil)">
+  <rect x="0" y="88" width="210" height="78" fill="#96ad8c" stroke="#263038" stroke-width="4"/>
+  <path d="M78 166 v-45 q27 -35 54 0 v45" fill="#fff6df" stroke="#263038" stroke-width="4"/>
+  <rect x="50" y="36" width="112" height="58" fill="#d55631" stroke="#263038" stroke-width="4"/>
+  <path d="M36 43 q70 -36 140 0 q-6 16 -18 20 q-54 -16 -108 0 q-12 -5 -14 -20z" fill="#c84a2c" stroke="#263038" stroke-width="4"/>
+  <path d="M58 18 q48 -25 96 0 q-5 14 -15 18 q-34 -10 -68 0 q-10 -4 -13 -18z" fill="#e27639" stroke="#263038" stroke-width="4"/>
+  <rect x="74" y="50" width="16" height="22" fill="#2ab08d" stroke="#263038" stroke-width="3"/><rect x="122" y="50" width="16" height="22" fill="#2ab08d" stroke="#263038" stroke-width="3"/>
+  <path d="M21 107 h18 M172 107 h18 M22 130 h28 M157 130 h28" stroke="#5a6c5b" stroke-width="4"/>
+</g>
+<g transform="translate(230 880) scale(0.78)" filter="url(#pencil)">
+  <rect x="14" y="58" width="178" height="88" fill="#e8c08b" stroke="#263038" stroke-width="4"/>
+  <path d="M0 60 L103 8 L206 60 Z" fill="#8fa9c9" stroke="#263038" stroke-width="4"/>
+  <rect x="42" y="84" width="24" height="34" fill="#fff2d5" stroke="#263038" stroke-width="3"/>
+  <rect x="90" y="82" width="26" height="64" fill="#7c5a43" stroke="#263038" stroke-width="3"/>
+  <rect x="140" y="84" width="24" height="34" fill="#fff2d5" stroke="#263038" stroke-width="3"/>
+  <path d="M20 149 h166" stroke="#263038" stroke-width="4"/>
+</g>
+<g transform="translate(380 1075) scale(0.82)" filter="url(#pencil)">
+  <rect x="30" y="72" width="162" height="34" fill="#b77749" stroke="#263038" stroke-width="4"/>
+  <path d="M14 72 q97 -48 194 0" fill="none" stroke="#263038" stroke-width="5"/>
+  <rect x="35" y="106" width="18" height="86" fill="#7d513b" stroke="#263038" stroke-width="4"/>
+  <rect x="169" y="106" width="18" height="86" fill="#7d513b" stroke="#263038" stroke-width="4"/>
+  <path d="M72 106 q39 44 78 0 v86 H72z" fill="#f8e5c5" stroke="#263038" stroke-width="4"/>
+  <path d="M62 52 q50 -30 100 0 q-4 12 -16 16 q-34 -10 -68 0 q-10 -4 -16 -16z" fill="#a45b35" stroke="#263038" stroke-width="4"/>
+</g>
+<g transform="translate(444 500) scale(0.72)" filter="url(#pencil)">
+  <rect x="28" y="54" width="112" height="82" fill="#f0c27e" stroke="#263038" stroke-width="4"/>
+  <path d="M14 58 L86 12 L154 58 Z" fill="#5f87ad" stroke="#263038" stroke-width="4"/>
+  <rect x="48" y="82" width="24" height="28" fill="#fff6df" stroke="#263038" stroke-width="3"/>
+  <rect x="94" y="80" width="28" height="56" fill="#7d513b" stroke="#263038" stroke-width="3"/>
+  <circle cx="152" cy="114" r="25" fill="#7bb567" stroke="#263038" stroke-width="3"/>
+  <path d="M153 95 v62 M132 128 q22 -12 42 -1" stroke="#4c7d42" stroke-width="4" fill="none"/>
+</g>
+<g transform="translate(444 205) scale(0.58)" filter="url(#pencil)">
+  <rect x="28" y="54" width="112" height="82" fill="#f0c27e" stroke="#263038" stroke-width="4"/>
+  <path d="M14 58 L86 12 L154 58 Z" fill="#5f87ad" stroke="#263038" stroke-width="4"/>
+  <rect x="48" y="82" width="24" height="28" fill="#fff6df" stroke="#263038" stroke-width="3"/>
+  <rect x="94" y="80" width="28" height="56" fill="#7d513b" stroke="#263038" stroke-width="3"/>
+  <circle cx="152" cy="114" r="25" fill="#7bb567" stroke="#263038" stroke-width="3"/>
+  <path d="M153 95 v62 M132 128 q22 -12 42 -1" stroke="#4c7d42" stroke-width="4" fill="none"/>
+</g>
+<g transform="translate(514 620) scale(0.55)" filter="url(#pencil)">
+  <path d="M50 145 C44 92 55 54 82 20" stroke="#5d4435" stroke-width="7" fill="none"/>
+  <path d="M74 42 C37 62 22 92 20 130 M82 50 C94 86 76 116 60 143 M96 38 C136 62 133 96 119 132" stroke="#5aa65d" stroke-width="5" fill="none" stroke-dasharray="10 8"/>
+</g>
+<g transform="translate(78 1010) scale(0.55)" filter="url(#pencil)">
+  <path d="M50 145 C44 92 55 54 82 20" stroke="#5d4435" stroke-width="7" fill="none"/>
+  <path d="M74 42 C37 62 22 92 20 130 M82 50 C94 86 76 116 60 143 M96 38 C136 62 133 96 119 132" stroke="#5aa65d" stroke-width="5" fill="none" stroke-dasharray="10 8"/>
+</g>
+<g transform="translate(560 748)" filter="url(#pencil)">
+  <path d="M6 42 q10 -18 20 0 q-10 18 -20 0z M34 34 q10 -18 20 0 q-10 18 -20 0z" fill="#f48ab2" stroke="#263038" stroke-width="2"/>
+  <path d="M18 58 v28 M46 50 v34" stroke="#5fa75d" stroke-width="4"/>
+  <path d="M18 70 q-16 -8 -20 8 M46 68 q16 -8 20 8" stroke="#5fa75d" stroke-width="4" fill="none"/>
+</g>
+<g transform="translate(54 910)">
+  <circle cx="0" cy="0" r="24" fill="#1f7a5a" stroke="#fffdf8" stroke-width="5"/>
+  <text x="0" y="9" class="ui en" font-size="28" fill="#fffdf8" text-anchor="middle">1</text>
+  <rect class="label" x="24" y="-26" width="170" height="52" rx="8"/>
+  <text x="38" y="-2" class="ui" font-size="25">中华门瓮城</text>
+  <text x="38" y="19" class="ui en" font-size="14" fill="#1f7a5a">Zhonghua Gate</text>
+</g>
+<g transform="translate(165 970)">
+  <circle cx="0" cy="0" r="24" fill="#1f7a5a" stroke="#fffdf8" stroke-width="5"/>
+  <text x="0" y="9" class="ui en" font-size="28" fill="#fffdf8" text-anchor="middle">2</text>
+  <rect class="label" x="24" y="-26" width="170" height="52" rx="8"/>
+  <text x="38" y="-2" class="ui" font-size="25">城墙博物馆</text>
+  <text x="38" y="19" class="ui en" font-size="14" fill="#1f7a5a">City Wall Museum</text>
+</g>
+<g transform="translate(486 1110)">
+  <circle cx="0" cy="0" r="24" fill="#1f7a5a" stroke="#fffdf8" stroke-width="5"/>
+  <text x="0" y="9" class="ui en" font-size="28" fill="#fffdf8" text-anchor="middle">3</text>
+  <rect class="label" x="24" y="-26" width="170" height="52" rx="8"/>
+  <text x="38" y="-2" class="ui" font-size="25">老门东</text>
+  <text x="38" y="19" class="ui en" font-size="14" fill="#1f7a5a">Laomendong</text>
+</g>
+<g transform="translate(423 676)">
+  <circle cx="0" cy="0" r="24" fill="#1f7a5a" stroke="#fffdf8" stroke-width="5"/>
+  <text x="0" y="9" class="ui en" font-size="28" fill="#fffdf8" text-anchor="middle">4</text>
+  <rect class="label" x="24" y="-26" width="170" height="52" rx="8"/>
+  <text x="38" y="-2" class="ui" font-size="25">小西湖</text>
+  <text x="38" y="19" class="ui en" font-size="14" fill="#1f7a5a">Xiaoxihu</text>
+</g>
+<g transform="translate(590 250)">
+  <circle cx="0" cy="0" r="24" fill="#1f7a5a" stroke="#fffdf8" stroke-width="5"/>
+  <text x="0" y="9" class="ui en" font-size="28" fill="#fffdf8" text-anchor="middle">5</text>
+  <rect class="label" x="24" y="-26" width="170" height="52" rx="8"/>
+  <text x="38" y="-2" class="ui" font-size="25">乌衣巷</text>
+  <text x="38" y="19" class="ui en" font-size="14" fill="#1f7a5a">Wuyi Alley</text>
+</g>
+<g filter="url(#pencil)" opacity=".85">
+  <path d="M552 205 q34 -32 68 0" stroke="#88c7d9" stroke-width="18" fill="none"/>
+  <path d="M552 220 q34 -32 68 0" stroke="#88c7d9" stroke-width="8" fill="none"/>
+  <path d="M518 175 q-20 -26 -48 2 q-22 -18 -43 4 q-21 2 -21 24 q56 16 116 -1" fill="#e8f8fb" stroke="#6e8fa0" stroke-width="3"/>
+  <path d="M94 1260 q22 -35 44 0 M108 1292 q24 -36 48 0" stroke="#5fa75d" stroke-width="6" fill="none"/>
+  <circle cx="118" cy="600" r="5" fill="#e26a6a"/><circle cx="572" cy="820" r="5" fill="#7a93d9"/><circle cx="425" cy="840" r="5" fill="#9b6bc5"/><circle cx="318" cy="760" r="5" fill="#e4b24f"/><path d="M620 720 l9 18 18 9 -18 9 -9 18 -9 -18 -18 -9 18 -9z" fill="#f4d467" stroke="#263038" stroke-width="2"/>
+</g>
+<rect x="24" y="1370" width="632" height="48" rx="6" fill="#fffdf8" opacity=".85"/>
+<text x="48" y="1402" class="ui" font-size="19" fill="#5d5246">中华门 → 城墙博物馆 → 老门东 → 小西湖 → 乌衣巷　全程约 2.0km · 步行约 26min</text></svg>
+  </g>
+  <text x="47" y="920" class="ui" font-size="48" font-weight="800">老城南线 · 文化巷行</text>
+  <path d="M48 944 C190 930 300 956 450 938" stroke="#d8c3ff" stroke-width="8" fill="none" filter="url(#pencil)"/>
+  <g transform="translate(46 990)">
+    <rect class="chip" x="0" y="0" width="76" height="45" rx="22"/><text x="38" y="31" class="ui" font-size="22" text-anchor="middle">历史</text>
+    <rect class="chip" x="106" y="0" width="76" height="45" rx="22"/><text x="144" y="31" class="ui" font-size="22" text-anchor="middle">城墙</text>
+    <rect class="chip" x="212" y="0" width="102" height="45" rx="22"/><text x="263" y="31" class="ui" font-size="22" text-anchor="middle">适合漫步</text>
+  </g>
+  <g transform="translate(72 1116)" class="ui" font-size="26">
+    <text x="0" y="0" fill="#62a955">◎</text><text x="42" y="0">2.0km</text>
+    <line x1="150" y1="-28" x2="150" y2="25" stroke="#dadada"/>
+    <text x="192" y="0" fill="#8d72d8">◷</text><text x="232" y="0">26min</text>
+    <line x1="340" y1="-28" x2="340" y2="25" stroke="#dadada"/>
+    <text x="382" y="0" fill="#e5af1f">△</text><text x="425" y="0">平坦</text>
+  </g>
+  <text x="65" y="1240" class="hand" font-size="27">从明城墙走进街巷，听一条城市南线的前世今生。</text>
+  <path d="M72 1264 C208 1248 374 1260 510 1242" stroke="#d8c3ff" stroke-width="7" fill="none" filter="url(#pencil)"/>
+  <rect x="90" y="1340" width="500" height="86" rx="43" fill="#77c85e" filter="url(#paper)"/>
+  <text x="340" y="1395" class="ui" font-size="34" font-weight="700" fill="#fff" text-anchor="middle">出发 →</text>
+</svg>

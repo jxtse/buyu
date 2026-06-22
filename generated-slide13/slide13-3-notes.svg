@@ -1,0 +1,84 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="680" height="1474" viewBox="0 0 680 1474">
+  <defs>
+    <filter id="paper" x="-10%" y="-10%" width="120%" height="120%">
+      <feColorMatrix in="SourceGraphic" type="matrix" values="1 0 0 0 0  0 1 0 0 0  0 0 1 0 0  0 0 0 1 0"/>
+    </filter>
+    <filter id="pencil" x="-20%" y="-20%" width="140%" height="140%">
+      <feTurbulence type="fractalNoise" baseFrequency=".045" numOctaves="3" seed="4" result="n"/>
+      <feDisplacementMap in="SourceGraphic" in2="n" scale="1.8"/>
+    </filter>
+    <style>
+      .ui{font-family:"Noto Sans SC","PingFang SC","Microsoft YaHei",sans-serif;fill:#171b22}
+      .en{font-family:"Inter","Helvetica Neue",Arial,sans-serif}
+      .hand{font-family:"Noto Sans SC","PingFang SC","Microsoft YaHei",sans-serif;fill:#263038}
+      .thin{stroke:#252b2d;stroke-width:4;stroke-linecap:round;stroke-linejoin:round;fill:none}
+      .route{stroke:#1f7a5a;stroke-width:11;stroke-linecap:round;stroke-linejoin:round;fill:none;stroke-dasharray:20 15;filter:url(#pencil)}
+      .routeSolid{stroke:#1f7a5a;stroke-width:12;stroke-linecap:round;stroke-linejoin:round;fill:none;filter:url(#pencil)}
+      .label{fill:#fffdf8;stroke:#d8a86f;stroke-width:2}
+      .chip{fill:#dff3d5}
+      .muted{fill:#687078}
+    </style>
+    
+  </defs>
+  <rect width="680" height="1474" fill="#fffdf8"/>
+  <path d="M-20 265 C120 330 245 205 398 283 S570 220 708 276" stroke="#e8d4ff" stroke-width="18" fill="none" opacity=".75" filter="url(#pencil)"/>
+  <text x="64" y="50" class="ui en" font-size="28" font-weight="700">9:41</text>
+  <g transform="translate(548 31)" fill="#111">
+    <rect x="0" y="16" width="7" height="15" rx="2"/><rect x="12" y="10" width="7" height="21" rx="2"/><rect x="24" y="4" width="7" height="27" rx="2"/>
+    <path d="M52 14 q18 -15 36 0" stroke="#111" stroke-width="5" fill="none"/><path d="M59 22 q11 -9 22 0" stroke="#111" stroke-width="5" fill="none"/>
+    <rect x="99" y="4" width="38" height="22" rx="4" fill="none" stroke="#111" stroke-width="4"/><rect x="103" y="8" width="28" height="14" rx="2"/>
+  </g>
+    <path d="M48 104 l-20 22 20 22" class="thin"/>
+  <text x="84" y="130" class="ui en" font-size="26">My Walk 〉 6月21日</text>
+  <text x="120" y="250" class="ui" font-size="55" font-weight="900">散步笔记</text>
+  <path d="M0 296 C150 250 300 334 486 288" stroke="#e8d4ff" stroke-width="14" fill="none" filter="url(#pencil)"/>
+  <rect x="50" y="360" width="160" height="44" rx="6" fill="#ead6ff"/><text x="65" y="392" class="ui en" font-size="28" font-weight="700">Key Points</text>
+  <text x="54" y="468" class="ui" font-size="25">• 走了 2.0km，从城门进入街巷肌理</text>
+  <text x="54" y="528" class="ui" font-size="25">• 在城墙砖铭里听见明代工匠责任制</text>
+  <text x="54" y="588" class="ui" font-size="25">• 小西湖的更新故事，比想象中温柔</text>
+  <g transform="translate(36 690)">
+    <path class="routeSolid" d="M42 584 C54 470 154 450 140 350 S245 262 248 178 S330 94 470 72"/>
+    <path d="M42 584 C160 536 250 620 370 540 S478 490 602 560" stroke="#ead6ff" stroke-width="6" fill="none" stroke-dasharray="16 16" filter="url(#pencil)"/>
+    <circle cx="42" cy="584" r="28" fill="#3e76dd" stroke="#fff" stroke-width="7"/><circle cx="470" cy="72" r="11" fill="#3e76dd"/>
+    <g transform="translate(18 405) scale(0.52)" filter="url(#pencil)">
+  <rect x="0" y="88" width="210" height="78" fill="#96ad8c" stroke="#263038" stroke-width="4"/>
+  <path d="M78 166 v-45 q27 -35 54 0 v45" fill="#fff6df" stroke="#263038" stroke-width="4"/>
+  <rect x="50" y="36" width="112" height="58" fill="#d55631" stroke="#263038" stroke-width="4"/>
+  <path d="M36 43 q70 -36 140 0 q-6 16 -18 20 q-54 -16 -108 0 q-12 -5 -14 -20z" fill="#c84a2c" stroke="#263038" stroke-width="4"/>
+  <path d="M58 18 q48 -25 96 0 q-5 14 -15 18 q-34 -10 -68 0 q-10 -4 -13 -18z" fill="#e27639" stroke="#263038" stroke-width="4"/>
+  <rect x="74" y="50" width="16" height="22" fill="#2ab08d" stroke="#263038" stroke-width="3"/><rect x="122" y="50" width="16" height="22" fill="#2ab08d" stroke="#263038" stroke-width="3"/>
+  <path d="M21 107 h18 M172 107 h18 M22 130 h28 M157 130 h28" stroke="#5a6c5b" stroke-width="4"/>
+</g>
+    <g transform="translate(198 282) scale(0.42)" filter="url(#pencil)">
+  <rect x="14" y="58" width="178" height="88" fill="#e8c08b" stroke="#263038" stroke-width="4"/>
+  <path d="M0 60 L103 8 L206 60 Z" fill="#8fa9c9" stroke="#263038" stroke-width="4"/>
+  <rect x="42" y="84" width="24" height="34" fill="#fff2d5" stroke="#263038" stroke-width="3"/>
+  <rect x="90" y="82" width="26" height="64" fill="#7c5a43" stroke="#263038" stroke-width="3"/>
+  <rect x="140" y="84" width="24" height="34" fill="#fff2d5" stroke="#263038" stroke-width="3"/>
+  <path d="M20 149 h166" stroke="#263038" stroke-width="4"/>
+</g>
+    <g transform="translate(320 148) scale(0.45)" filter="url(#pencil)">
+  <rect x="30" y="72" width="162" height="34" fill="#b77749" stroke="#263038" stroke-width="4"/>
+  <path d="M14 72 q97 -48 194 0" fill="none" stroke="#263038" stroke-width="5"/>
+  <rect x="35" y="106" width="18" height="86" fill="#7d513b" stroke="#263038" stroke-width="4"/>
+  <rect x="169" y="106" width="18" height="86" fill="#7d513b" stroke="#263038" stroke-width="4"/>
+  <path d="M72 106 q39 44 78 0 v86 H72z" fill="#f8e5c5" stroke="#263038" stroke-width="4"/>
+  <path d="M62 52 q50 -30 100 0 q-4 12 -16 16 q-34 -10 -68 0 q-10 -4 -16 -16z" fill="#a45b35" stroke="#263038" stroke-width="4"/>
+</g>
+    <g transform="translate(18 105) scale(0.66)" filter="url(#pencil)">
+  <path d="M50 145 C44 92 55 54 82 20" stroke="#5d4435" stroke-width="7" fill="none"/>
+  <path d="M74 42 C37 62 22 92 20 130 M82 50 C94 86 76 116 60 143 M96 38 C136 62 133 96 119 132" stroke="#5aa65d" stroke-width="5" fill="none" stroke-dasharray="10 8"/>
+</g>
+    <g transform="translate(510 410)" filter="url(#pencil)">
+  <path d="M6 42 q10 -18 20 0 q-10 18 -20 0z M34 34 q10 -18 20 0 q-10 18 -20 0z" fill="#f48ab2" stroke="#263038" stroke-width="2"/>
+  <path d="M18 58 v28 M46 50 v34" stroke="#5fa75d" stroke-width="4"/>
+  <path d="M18 70 q-16 -8 -20 8 M46 68 q16 -8 20 8" stroke="#5fa75d" stroke-width="4" fill="none"/>
+</g>
+    <text x="266" y="414" class="hand" font-size="27">城砖上的名字</text>
+    <path d="M265 430 q88 16 176 0" stroke="#e4c7ff" stroke-width="7" fill="none" filter="url(#pencil)"/>
+    <text x="374" y="218" class="hand" font-size="25">老门东的牌坊</text>
+    <path d="M374 234 q76 14 156 0" stroke="#f7d15a" stroke-width="7" fill="none" filter="url(#pencil)"/>
+    <text x="102" y="622" class="hand en" font-size="24">START</text>
+  </g>
+  <circle cx="586" cy="1326" r="58" fill="#91d881" filter="url(#paper)"/><text x="586" y="1348" class="ui" font-size="56" text-anchor="middle">♬</text>
+</svg>
