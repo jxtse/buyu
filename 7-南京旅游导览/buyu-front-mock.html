@@ -1,0 +1,945 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>步语 · 老城南线 iPhone Mock</title>
+    <style>
+      :root {
+        --phone-w: 680px;
+        --phone-h: 1474px;
+        --paper: #f5f0e6;
+        --paper-soft: #fbf8f0;
+        --surface: #ffffff;
+        --surface-green: #eef7f0;
+        --ink: #102f26;
+        --muted: #62746b;
+        --faint: #dfe7df;
+        --emerald: #0f7654;
+        --emerald-dark: #0a4d3a;
+        --red: #87312b;
+        --red-soft: #b9584d;
+        --gold: #b98a46;
+        --map-opacity: 0.62;
+        color-scheme: light;
+      }
+
+      * {
+        box-sizing: border-box;
+      }
+
+      html,
+      body {
+        min-height: 100%;
+      }
+
+      body {
+        margin: 0;
+        color: var(--ink);
+        font-family:
+          "LXGW WenKai", "STKaiti", "Kaiti SC", "KaiTi", "Microsoft YaHei",
+          system-ui, sans-serif;
+        background:
+          radial-gradient(circle at 20% 12%, rgba(37, 119, 85, 0.16), transparent 28%),
+          linear-gradient(135deg, #092218, #0e2d21 48%, #06140f);
+      }
+
+      button,
+      input {
+        font: inherit;
+      }
+
+      .stage {
+        min-height: 100vh;
+        display: grid;
+        place-items: center;
+        padding: 36px;
+      }
+
+      .phone {
+        position: relative;
+        width: var(--phone-w);
+        height: var(--phone-h);
+        overflow: hidden;
+        border: 12px solid #050706;
+        border-radius: 62px;
+        background: #050706;
+        box-shadow: 0 34px 90px rgba(0, 0, 0, 0.45);
+      }
+
+      .screen {
+        position: relative;
+        width: 100%;
+        height: 100%;
+        overflow: hidden;
+        border-radius: 49px;
+        background: var(--paper-soft);
+      }
+
+      .screen::before {
+        position: absolute;
+        inset: 0;
+        content: "";
+        pointer-events: none;
+        opacity: 0.34;
+        background-image:
+          radial-gradient(circle at 20px 26px, rgba(139, 94, 44, 0.08) 0 1px, transparent 1px),
+          radial-gradient(circle at 68px 72px, rgba(139, 94, 44, 0.05) 0 1px, transparent 1px);
+        background-size: 88px 88px;
+        mix-blend-mode: multiply;
+      }
+
+      .dynamic-island {
+        position: absolute;
+        top: 26px;
+        left: 50%;
+        z-index: 20;
+        width: 142px;
+        height: 35px;
+        border-radius: 999px;
+        background: #050706;
+        transform: translateX(-50%);
+      }
+
+      .status-bar {
+        position: relative;
+        z-index: 10;
+        height: 78px;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        padding: 20px 42px 0;
+        color: #101410;
+        font-family: Arial, sans-serif;
+        font-size: 17px;
+        font-weight: 800;
+      }
+
+      .status-icons {
+        display: flex;
+        align-items: center;
+        gap: 14px;
+      }
+
+      .dots {
+        display: flex;
+        gap: 6px;
+      }
+
+      .dots span {
+        width: 8px;
+        height: 8px;
+        border-radius: 50%;
+        background: #17241e;
+      }
+
+      .app {
+        position: relative;
+        z-index: 2;
+        height: calc(100% - 78px);
+        display: flex;
+        flex-direction: column;
+        padding: 0 30px 30px;
+      }
+
+      .header {
+        padding: 6px 0 18px;
+        border-bottom: 1px solid rgba(16, 47, 38, 0.08);
+      }
+
+      .title-row {
+        display: flex;
+        align-items: baseline;
+        gap: 10px;
+      }
+
+      h1 {
+        margin: 0;
+        color: var(--ink);
+        font-size: 34px;
+        font-weight: 700;
+        line-height: 1.1;
+        letter-spacing: 0;
+      }
+
+      .en-title {
+        color: var(--emerald);
+        font-family: Georgia, "Times New Roman", serif;
+        font-size: 15px;
+        font-style: italic;
+        font-weight: 700;
+      }
+
+      .subtitle {
+        margin: 8px 0 0;
+        color: #4a5d54;
+        font-family: "Microsoft YaHei", system-ui, sans-serif;
+        font-size: 17px;
+        font-weight: 600;
+      }
+
+      .realtime {
+        display: flex;
+        align-items: center;
+        gap: 9px;
+        margin-top: 10px;
+        color: var(--emerald-dark);
+        font-family: "Microsoft YaHei", system-ui, sans-serif;
+        font-size: 14px;
+        font-weight: 800;
+      }
+
+      .realtime::before {
+        width: 12px;
+        height: 12px;
+        content: "";
+        border-radius: 50%;
+        background: var(--emerald);
+        box-shadow: 0 0 0 6px rgba(15, 118, 84, 0.1);
+      }
+
+      .section-label {
+        margin: 18px 0 12px;
+        color: var(--emerald-dark);
+        font-family: "Microsoft YaHei", system-ui, sans-serif;
+        font-size: 15px;
+        font-weight: 900;
+      }
+
+      .section-label::before {
+        content: "— ";
+      }
+
+      .topic-tabs,
+      .version-tabs {
+        display: flex;
+        gap: 10px;
+        overflow-x: auto;
+        padding-bottom: 2px;
+        scrollbar-width: none;
+      }
+
+      .topic-tabs::-webkit-scrollbar,
+      .version-tabs::-webkit-scrollbar,
+      .route-scroll::-webkit-scrollbar {
+        display: none;
+      }
+
+      .topic-chip {
+        min-width: max-content;
+        height: 42px;
+        padding: 0 18px;
+        border: 1px solid var(--faint);
+        border-radius: 999px;
+        color: #4e6158;
+        background: var(--surface);
+        font-family: "Microsoft YaHei", system-ui, sans-serif;
+        font-size: 15px;
+        font-weight: 800;
+      }
+
+      .topic-chip.is-active {
+        color: #fffaf0;
+        border-color: var(--emerald);
+        background: var(--emerald);
+      }
+
+      .route-scroll {
+        display: flex;
+        gap: 12px;
+        overflow-x: auto;
+        padding: 1px 2px 4px;
+        scrollbar-width: none;
+      }
+
+      .route-card {
+        min-width: 136px;
+        min-height: 105px;
+        padding: 14px 12px;
+        border: 1.5px solid var(--faint);
+        border-radius: 18px;
+        background: var(--surface);
+        color: #1a3229;
+        box-shadow: 0 7px 16px rgba(19, 48, 38, 0.05);
+      }
+
+      .route-card.is-active {
+        border-color: var(--emerald);
+        background: #eaf7ef;
+        box-shadow: 0 10px 24px rgba(15, 118, 84, 0.14);
+      }
+
+      .route-card b {
+        width: 38px;
+        height: 38px;
+        display: grid;
+        place-items: center;
+        margin-bottom: 9px;
+        border-radius: 50%;
+        color: #fffaf0;
+        background: var(--emerald);
+        font-family: Georgia, serif;
+        font-size: 20px;
+      }
+
+      .route-card span {
+        display: block;
+        font-family: "Microsoft YaHei", system-ui, sans-serif;
+        font-size: 15px;
+        font-weight: 900;
+        line-height: 1.25;
+      }
+
+      .route-card small {
+        display: block;
+        margin-top: 4px;
+        color: var(--muted);
+        font-family: "Microsoft YaHei", system-ui, sans-serif;
+        font-size: 12px;
+        font-weight: 700;
+      }
+
+      .map-card {
+        position: relative;
+        min-height: 310px;
+        margin-top: 14px;
+        overflow: hidden;
+        border: 1px solid rgba(16, 47, 38, 0.1);
+        border-radius: 22px;
+        background: #d8d1bd;
+        box-shadow: 0 12px 26px rgba(36, 46, 32, 0.12);
+      }
+
+      .map-image {
+        position: absolute;
+        inset: 0;
+        opacity: var(--map-opacity);
+        background-image: url("file:///C:/Users/jxTse/Desktop/7-%E5%8D%97%E4%BA%AC%E6%97%85%E6%B8%B8%E5%AF%BC%E8%A7%88/%E5%9B%BE%E7%89%87/1.png");
+        background-position: 18% 63%;
+        background-size: 120% auto;
+        filter: saturate(0.92) contrast(0.98);
+      }
+
+      .map-card::after {
+        position: absolute;
+        inset: 0;
+        content: "";
+        pointer-events: none;
+        background:
+          linear-gradient(180deg, rgba(7, 86, 63, 0.02), rgba(7, 86, 63, 0.12)),
+          linear-gradient(0deg, rgba(0, 0, 0, 0.32), transparent 48%);
+      }
+
+      .map-tools {
+        position: absolute;
+        top: 14px;
+        right: 14px;
+        z-index: 3;
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        padding: 7px 9px;
+        border: 1px solid rgba(255, 255, 255, 0.36);
+        border-radius: 999px;
+        background: rgba(255, 250, 240, 0.82);
+        backdrop-filter: blur(10px);
+      }
+
+      .view-button {
+        height: 28px;
+        border: 0;
+        border-radius: 999px;
+        padding: 0 11px;
+        color: var(--emerald-dark);
+        background: transparent;
+        cursor: pointer;
+        font-family: "Microsoft YaHei", system-ui, sans-serif;
+        font-size: 12px;
+        font-weight: 900;
+      }
+
+      .view-button.is-active {
+        color: #fffaf0;
+        background: var(--emerald);
+      }
+
+      .opacity {
+        width: 78px;
+        accent-color: var(--red);
+      }
+
+      .map-status {
+        position: absolute;
+        left: 16px;
+        bottom: 14px;
+        z-index: 3;
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+        padding: 7px 12px;
+        border-radius: 999px;
+        color: #fffaf0;
+        background: rgba(4, 57, 42, 0.86);
+        font-family: "Microsoft YaHei", system-ui, sans-serif;
+        font-size: 13px;
+        font-weight: 900;
+        backdrop-filter: blur(8px);
+      }
+
+      .map-status::before {
+        width: 9px;
+        height: 9px;
+        content: "";
+        border-radius: 50%;
+        background: #58c2a1;
+      }
+
+      .current-pin {
+        position: absolute;
+        left: 25%;
+        top: 52%;
+        z-index: 4;
+        width: 24px;
+        height: 24px;
+        border: 3px solid rgba(255, 250, 240, 0.95);
+        border-radius: 50% 50% 50% 4px;
+        background: var(--red);
+        box-shadow:
+          0 8px 15px rgba(76, 28, 24, 0.24),
+          0 0 0 7px rgba(135, 49, 43, 0.1);
+        transform: translate(-50%, -50%) rotate(-45deg);
+      }
+
+      .current-pin::after {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        width: 6px;
+        height: 6px;
+        content: "";
+        border-radius: 50%;
+        background: #fffaf0;
+        transform: translate(-50%, -50%);
+      }
+
+      .map-card.is-no-map {
+        background:
+          radial-gradient(circle at 82% 14%, rgba(15, 118, 84, 0.14), transparent 30%),
+          linear-gradient(145deg, #fff8ea, #e9dcc5);
+      }
+
+      .map-card.is-no-map .map-image,
+      .map-card.is-no-map .map-status,
+      .map-card.is-no-map .current-pin,
+      .map-card.is-no-map::after {
+        display: none;
+      }
+
+      .no-map-route {
+        position: absolute;
+        inset: 0;
+        z-index: 2;
+        display: none;
+        padding: 26px;
+      }
+
+      .map-card.is-no-map .no-map-route {
+        display: grid;
+        grid-template-columns: 1fr;
+        align-content: center;
+        gap: 14px;
+      }
+
+      .progress-row {
+        display: grid;
+        grid-template-columns: 42px 1fr auto;
+        align-items: center;
+        gap: 12px;
+        padding: 12px;
+        border: 1px solid rgba(15, 118, 84, 0.15);
+        border-radius: 18px;
+        background: rgba(255, 255, 255, 0.72);
+      }
+
+      .progress-row b {
+        width: 34px;
+        height: 34px;
+        display: grid;
+        place-items: center;
+        border-radius: 50%;
+        color: #fffaf0;
+        background: var(--emerald);
+        font-family: Georgia, serif;
+      }
+
+      .progress-row:first-child b {
+        background: var(--red);
+      }
+
+      .progress-row span {
+        font-family: "Microsoft YaHei", system-ui, sans-serif;
+        font-size: 16px;
+        font-weight: 900;
+      }
+
+      .progress-row small {
+        color: var(--muted);
+        font-family: "Microsoft YaHei", system-ui, sans-serif;
+        font-size: 12px;
+        font-weight: 800;
+      }
+
+      .content-card {
+        margin-top: 16px;
+        padding: 21px 20px 18px;
+        border: 1px solid rgba(16, 47, 38, 0.1);
+        border-radius: 24px;
+        background: rgba(255, 255, 255, 0.88);
+        box-shadow: 0 12px 24px rgba(36, 46, 32, 0.08);
+      }
+
+      .content-card h2 {
+        margin: 0;
+        color: #123428;
+        font-size: 27px;
+        font-weight: 800;
+        line-height: 1.2;
+      }
+
+      .intro {
+        margin: 8px 0 16px;
+        color: var(--emerald-dark);
+        font-family: "Microsoft YaHei", system-ui, sans-serif;
+        font-size: 15px;
+        font-weight: 800;
+        line-height: 1.45;
+      }
+
+      .version-tab {
+        min-width: max-content;
+        height: 40px;
+        border: 1px solid rgba(15, 118, 84, 0.18);
+        border-radius: 999px;
+        padding: 0 16px;
+        color: var(--emerald-dark);
+        background: #eef7f0;
+        cursor: pointer;
+        font-family: "Microsoft YaHei", system-ui, sans-serif;
+        font-size: 14px;
+        font-weight: 900;
+      }
+
+      .version-tab.is-active {
+        color: #fffaf0;
+        border-color: var(--emerald-dark);
+        background: var(--emerald-dark);
+      }
+
+      .guide-card {
+        margin-top: 16px;
+        padding: 18px;
+        border-radius: 22px;
+        background: #f3faf5;
+      }
+
+      .guide-head {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 12px;
+        margin-bottom: 14px;
+      }
+
+      .guide-person {
+        display: flex;
+        align-items: center;
+        gap: 12px;
+      }
+
+      .avatar {
+        width: 43px;
+        height: 43px;
+        display: grid;
+        place-items: center;
+        border-radius: 50%;
+        color: #fffaf0;
+        background: var(--emerald);
+        font-size: 20px;
+      }
+
+      .guide-person b {
+        display: block;
+        color: #17392e;
+        font-family: "Microsoft YaHei", system-ui, sans-serif;
+        font-size: 16px;
+        font-weight: 900;
+      }
+
+      .guide-person small {
+        color: var(--muted);
+        font-family: "Microsoft YaHei", system-ui, sans-serif;
+        font-size: 12px;
+        font-weight: 700;
+      }
+
+      .live-status {
+        min-width: max-content;
+        padding: 7px 11px;
+        border-radius: 999px;
+        color: var(--emerald-dark);
+        background: #ffffff;
+        font-family: "Microsoft YaHei", system-ui, sans-serif;
+        font-size: 12px;
+        font-weight: 900;
+      }
+
+      .script-text {
+        max-height: 192px;
+        margin: 0;
+        overflow: auto;
+        color: #1f342c;
+        font-size: 20px;
+        line-height: 1.65;
+      }
+
+      .script-text strong {
+        color: var(--emerald-dark);
+        font-weight: 900;
+      }
+
+      .voice-dock {
+        position: absolute;
+        right: 30px;
+        bottom: 30px;
+        left: 30px;
+        z-index: 15;
+        display: grid;
+        grid-template-columns: 1fr 54px;
+        gap: 12px;
+      }
+
+      .next-stop-card {
+        position: absolute;
+        right: 30px;
+        bottom: 105px;
+        left: 30px;
+        z-index: 15;
+        display: flex;
+        align-items: center;
+        gap: 12px;
+        min-height: 54px;
+        padding: 12px 16px;
+        border: 1px solid rgba(15, 118, 84, 0.18);
+        border-radius: 18px;
+        color: var(--emerald-dark);
+        background: rgba(255, 255, 255, 0.9);
+        box-shadow: 0 12px 24px rgba(36, 46, 32, 0.1);
+        font-family: "Microsoft YaHei", system-ui, sans-serif;
+        font-size: 16px;
+        font-weight: 900;
+      }
+
+      .next-stop-card::before {
+        width: 28px;
+        height: 28px;
+        display: grid;
+        place-items: center;
+        content: "→";
+        border-radius: 50%;
+        color: #fffaf0;
+        background: var(--emerald);
+        font-size: 17px;
+      }
+
+      .voice-button {
+        height: 61px;
+        border: 0;
+        border-radius: 999px;
+        color: #fffaf0;
+        background: var(--emerald);
+        cursor: pointer;
+        box-shadow: 0 14px 28px rgba(15, 118, 84, 0.28);
+        font-family: "Microsoft YaHei", system-ui, sans-serif;
+        font-size: 19px;
+        font-weight: 900;
+      }
+
+      .voice-button.is-playing {
+        background: var(--red);
+      }
+
+      .interrupt-button {
+        width: 54px;
+        height: 54px;
+        align-self: center;
+        border: 1px solid rgba(16, 47, 38, 0.15);
+        border-radius: 50%;
+        color: #1d322a;
+        background: #ffffff;
+        cursor: pointer;
+        font-size: 26px;
+        line-height: 1;
+      }
+
+      .interrupt-button:disabled {
+        cursor: not-allowed;
+        opacity: 0.45;
+      }
+
+      .home-indicator {
+        position: absolute;
+        bottom: 11px;
+        left: 50%;
+        z-index: 20;
+        width: 210px;
+        height: 7px;
+        border-radius: 999px;
+        background: #050706;
+        transform: translateX(-50%);
+      }
+
+      @media (max-width: 760px) {
+        .stage {
+          place-items: start center;
+          padding: 12px;
+        }
+
+        .phone {
+          transform: scale(calc((100vw - 24px) / 680));
+          transform-origin: top center;
+        }
+      }
+
+      body.export-mode .stage {
+        min-height: var(--phone-h);
+        padding: 0;
+        place-items: start center;
+      }
+
+      body.export-mode .phone {
+        box-shadow: none;
+        transform: none !important;
+      }
+    </style>
+  </head>
+  <body>
+    <main class="stage">
+      <section class="phone" aria-label="680x1474 iPhone 界面模拟">
+        <div class="screen">
+          <div class="dynamic-island" aria-hidden="true"></div>
+          <div class="status-bar">
+            <span>9:41</span>
+            <span class="status-icons"><span class="dots"><span></span><span></span><span></span></span></span>
+          </div>
+
+          <div class="app">
+            <header class="header">
+              <div class="title-row">
+                <h1>老城南线</h1>
+                <span class="en-title">Old Southern City</span>
+              </div>
+              <p class="subtitle">从中华门到老门东，一条线走完南京 1700 年</p>
+              <p class="realtime">实时语音引擎在线 · stepaudio-2.5-realtime</p>
+            </header>
+
+            <p class="section-label">选兴趣，让讲解记得你爱听什么</p>
+            <div class="topic-tabs" aria-label="讲解兴趣">
+              <button class="topic-chip is-active" type="button">建筑形制</button>
+              <button class="topic-chip" type="button">市井烟火</button>
+              <button class="topic-chip" type="button">名人故事</button>
+              <button class="topic-chip" type="button">城市更新</button>
+              <button class="topic-chip" type="button">剧院文明</button>
+            </div>
+
+            <p class="section-label">路线，点一个点位，模拟走到 GPS 触发讲解</p>
+            <div class="route-scroll" aria-label="老城南线">
+              <article class="route-card is-active"><b>1</b><span>中华门</span><small>明</small></article>
+              <article class="route-card"><b>2</b><span>南京城墙博物馆</span><small>明</small></article>
+              <article class="route-card"><b>3</b><span>老门东历史文化街区</span><small>明清</small></article>
+              <article class="route-card"><b>4</b><span>小西湖街区</span><small>近现代</small></article>
+            </div>
+
+            <section class="map-card" id="mapCard" aria-label="地图或路线卡片">
+              <div class="map-image" aria-hidden="true"></div>
+              <div class="current-pin" aria-label="当前位置：中华门"></div>
+              <div class="map-tools">
+                <button class="view-button is-active" type="button" data-map-view="map">地图</button>
+                <button class="view-button" type="button" data-map-view="no-map">无图</button>
+                <input class="opacity" id="opacityRange" type="range" min="20" max="100" value="62" aria-label="地图透明度" />
+              </div>
+              <span class="map-status">中华门 · 已抵达 · GPS 触发讲解</span>
+              <div class="no-map-route" aria-hidden="true">
+                <div class="progress-row"><b>1</b><span>中华门瓮城</span><small>现在</small></div>
+                <div class="progress-row"><b>2</b><span>南京城墙博物馆</span><small>6 min</small></div>
+                <div class="progress-row"><b>3</b><span>老门东历史文化街区</span><small>15 min</small></div>
+              </div>
+            </section>
+
+            <article class="content-card">
+              <h2>中华门（聚宝门）</h2>
+              <p class="intro" id="introText"></p>
+
+              <div class="version-tabs" role="tablist" aria-label="讲解版本">
+                <button class="version-tab is-active" type="button" data-version="normal">普通游客版</button>
+                <button class="version-tab" type="button" data-version="history">深度历史版</button>
+                <button class="version-tab" type="button" data-version="family">亲子科普版</button>
+                <button class="version-tab" type="button" data-version="english">English</button>
+              </div>
+
+              <section class="guide-card" aria-label="实时讲解词">
+                <div class="guide-head">
+                  <div class="guide-person">
+                    <span class="avatar">步</span>
+                    <div>
+                      <b>步语导览员</b>
+                      <small>实时讲解词 · 可打断/可续讲</small>
+                    </div>
+                  </div>
+                  <span class="live-status" id="liveStatus">待命</span>
+                </div>
+                <p class="script-text" id="scriptText"></p>
+              </section>
+            </article>
+          </div>
+
+          <div class="next-stop-card">下一站：中华门瓮城-观光台</div>
+          <div class="voice-dock">
+            <button class="voice-button" id="voiceButton" type="button">按住说话（可打断）</button>
+            <button class="interrupt-button" id="interruptButton" type="button" disabled aria-label="打断语音">×</button>
+          </div>
+          <div class="home-indicator" aria-hidden="true"></div>
+        </div>
+      </section>
+    </main>
+
+    <script>
+      if (new URLSearchParams(window.location.search).has("export")) {
+        document.body.classList.add("export-mode");
+      }
+
+      const content = {
+        normal: {
+          status: "普通游客版",
+          intro:
+            "明·1366 起建，世界最大瓮城式城门，27 个藏兵洞可藏兵 3000。",
+          script:
+            "现在我们站在中华门前。它不像一扇普通城门，而像一组层层递进的古代安全关卡。敌人进了第一道门，并不会马上进城，而是会被困在瓮城里。你可以把它想象成南京城南的一道巨大的缓冲区：一边是厚重的城墙，一边是慢慢展开的老城南街巷。"
+        },
+        history: {
+          status: "深度历史版",
+          intro:
+            "中华门原名聚宝门，是南京明城墙南部的重要节点，也是明代复合瓮城防御体系的代表。",
+          script:
+            "中华门的价值不只在于体量宏大，更在于它清楚展示了明代都城防御的空间逻辑。多重瓮城、门道、闸槽、藏兵洞和城台彼此配合，形成纵深防御。它不是孤立的建筑，而是连接军事、行政、工匠技术和城市秩序的一套系统。"
+        },
+        family: {
+          status: "亲子科普版",
+          intro:
+            "中华门像一座古代城门迷宫，门洞、坡道和藏兵洞都可以变成孩子找线索的小任务。",
+          script:
+            "小朋友可以先观察一下：这座城门是不是比想象中大很多？它不是一扇门，而像一座古代安全迷宫。我们可以玩三个任务：找一找门洞有多高，城砖有多大，哪里像藏人的小房间。看完以后，你会发现古人真的很会设计城市。"
+        },
+        english: {
+          status: "English",
+          intro:
+            "Zhonghua Gate is a massive Ming-dynasty fortress gate where city defense, architecture, and everyday Nanjing meet.",
+          script:
+            "You are standing in front of Zhonghua Gate, one of the most impressive surviving gates of Nanjing's Ming city wall. It is not just a single entrance. It works like a layered fortress, with enclosed spaces, ramps, gate passages, and hidden chambers for soldiers."
+        }
+      };
+
+      const root = document.documentElement;
+      const mapCard = document.querySelector("#mapCard");
+      const opacityRange = document.querySelector("#opacityRange");
+      const viewButtons = document.querySelectorAll(".view-button");
+      const versionTabs = document.querySelectorAll(".version-tab");
+      const introText = document.querySelector("#introText");
+      const scriptText = document.querySelector("#scriptText");
+      const liveStatus = document.querySelector("#liveStatus");
+      const voiceButton = document.querySelector("#voiceButton");
+      const interruptButton = document.querySelector("#interruptButton");
+
+      let currentVersion = "normal";
+      let playing = false;
+      let timer = null;
+
+      function setVersion(version) {
+        currentVersion = version;
+        introText.textContent = content[version].intro;
+        scriptText.innerHTML = content[version].script.replace(
+          /中华门|Zhonghua Gate/g,
+          "<strong>$&</strong>"
+        );
+        liveStatus.textContent = content[version].status;
+        stopVoice("按住说话（可打断）");
+        versionTabs.forEach((tab) => {
+          tab.classList.toggle("is-active", tab.dataset.version === version);
+        });
+      }
+
+      function startVoice() {
+        stopVoice("按住说话（可打断）");
+        playing = true;
+        voiceButton.classList.add("is-playing");
+        voiceButton.textContent = "正在讲解，点击可暂停";
+        interruptButton.disabled = false;
+        liveStatus.textContent = "播放中";
+
+        if ("speechSynthesis" in window) {
+          const utterance = new SpeechSynthesisUtterance(content[currentVersion].script);
+          utterance.lang = currentVersion === "english" ? "en-US" : "zh-CN";
+          utterance.rate = currentVersion === "history" ? 0.86 : 0.92;
+          utterance.pitch = 0.92;
+          utterance.onend = () => stopVoice("继续向城墙博物馆出发");
+          utterance.onerror = () => stopVoice("语音不可用，可阅读讲解词");
+          window.speechSynthesis.speak(utterance);
+        } else {
+          timer = window.setTimeout(() => stopVoice("浏览器不支持语音合成"), 6000);
+        }
+      }
+
+      function stopVoice(label = "讲解已打断") {
+        if (timer) {
+          window.clearTimeout(timer);
+          timer = null;
+        }
+        if ("speechSynthesis" in window) {
+          window.speechSynthesis.cancel();
+        }
+        playing = false;
+        voiceButton.classList.remove("is-playing");
+        voiceButton.textContent = label;
+        interruptButton.disabled = true;
+        liveStatus.textContent = content[currentVersion].status;
+      }
+
+      opacityRange.addEventListener("input", () => {
+        root.style.setProperty("--map-opacity", Number(opacityRange.value) / 100);
+      });
+
+      viewButtons.forEach((button) => {
+        button.addEventListener("click", () => {
+          const noMap = button.dataset.mapView === "no-map";
+          mapCard.classList.toggle("is-no-map", noMap);
+          viewButtons.forEach((item) => item.classList.toggle("is-active", item === button));
+        });
+      });
+
+      versionTabs.forEach((tab) => {
+        tab.addEventListener("click", () => setVersion(tab.dataset.version));
+      });
+
+      voiceButton.addEventListener("click", () => {
+        if (playing) {
+          stopVoice();
+        } else {
+          startVoice();
+        }
+      });
+
+      interruptButton.addEventListener("click", () => stopVoice());
+
+      setVersion("normal");
+    </script>
+  </body>
+</html>
