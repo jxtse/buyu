@@ -179,6 +179,80 @@ body{font-family:-apple-system,"PingFang SC","Microsoft YaHei",sans-serif;
 .tech-foot{padding:9px 16px;border-top:1px solid #1d3328;display:flex;gap:13px}
 .tech-foot .lg{display:flex;align-items:center;gap:5px;font-size:9.5px;color:var(--tech-muted)}
 .tech-foot .lg i{width:8px;height:8px;border-radius:2px}
+
+/* ============ Warm retro mobile redesign ============ */
+:root{
+  --green:#0F7654;--green-d:#0F765455;--green-l:#EEF7F0;--green-dd:#0A4D3A;
+  --ink:#102F26;--muted:#62746B;--line:#DCE4DC;--bg:#092218;
+  --gold:#B98A46;--warn:#87312B;--card-sh:0 12px 28px rgba(55,43,25,.10);--map-opacity:.62;
+}
+body{
+  display:grid;place-items:center;min-height:100vh;padding:34px;
+  background:radial-gradient(circle at 18% 14%,rgba(31,122,90,.18),transparent 30%),linear-gradient(135deg,#092218,#0E2D21 48%,#06140F)
+}
+.intro,.tech{display:none}
+.phone{
+  width:680px;height:1474px;border:12px solid #050706;border-radius:62px;
+  background:#FBF8F0;box-shadow:0 34px 90px rgba(0,0,0,.45);overflow:hidden
+}
+.phone::after{
+  content:"";position:absolute;inset:0;pointer-events:none;opacity:.32;z-index:0;
+  background-image:radial-gradient(circle at 20px 26px,rgba(139,94,44,.08) 0 1px,transparent 1px),radial-gradient(circle at 68px 72px,rgba(139,94,44,.05) 0 1px,transparent 1px);
+  background-size:88px 88px;mix-blend-mode:multiply
+}
+.notch{top:14px;width:142px;height:35px;border-radius:999px}
+.statusbar{
+  position:relative;z-index:4;height:78px;align-items:center;padding:18px 42px 0;
+  background:#FBF8F0;font-size:17px;font-family:Arial,sans-serif;font-weight:800
+}
+.statusbar span:nth-child(2){display:none}
+.statusbar span:last-child{font-size:12px;letter-spacing:5px}
+.topbar{
+  position:relative;z-index:4;padding:12px 30px 22px;background:rgba(251,248,240,.92);
+  border-bottom:1px solid rgba(16,47,38,.09)
+}
+.topbar .r1{gap:12px}.topbar h2{font-size:34px;line-height:1.1}.topbar .en{font-size:15px;font-family:Georgia,serif;font-weight:700}
+.topbar .sub{font-size:17px;margin-top:8px;font-weight:600}.health{font-size:14px;margin-top:10px;gap:9px;font-weight:700}.health .dot{width:12px;height:12px}
+.feed{position:relative;z-index:2;padding:14px 30px 220px;background:transparent}
+.sect{font-size:15px;margin:18px 0 12px;gap:9px;letter-spacing:0}.sect::before{width:18px;height:2px}
+.chips{flex-wrap:nowrap;overflow-x:auto;gap:10px;margin-bottom:5px;padding-bottom:2px}.chips::-webkit-scrollbar{display:none}
+.chip{min-width:max-content;height:42px;padding:0 18px;border-radius:999px;font-size:15px;font-weight:800;background:#fff}
+.route{gap:12px;padding:1px 2px 5px;margin-bottom:14px}
+.node{min-width:136px;min-height:105px;padding:14px 12px;border-radius:18px;text-align:left;box-shadow:0 7px 16px rgba(19,48,38,.05)}
+.node .idx{width:38px;height:38px;margin:0 0 9px;border-radius:50%;font-size:20px;background:var(--green)}
+.node .nm{font-size:15px;line-height:1.25}.node .er{font-size:12px;margin-top:4px}.node.active{box-shadow:0 10px 24px rgba(15,118,84,.14)}
+.routemap{
+  height:310px;margin:14px 0 16px;border-radius:22px;border-color:rgba(16,47,38,.10);
+  background:#E9DFC9;
+  box-shadow:0 12px 26px rgba(36,46,32,.12);cursor:default
+}
+.routemap img,.routemap .rm-cap{display:none}
+.routemap::before{content:"";position:absolute;inset:0;opacity:var(--map-opacity);background-image:url('/static/img/route_map.png');background-position:18% 63%;background-size:120% auto;background-repeat:no-repeat}
+.routemap::after{content:"";position:absolute;inset:0;z-index:1;pointer-events:none;background:linear-gradient(180deg,rgba(7,86,63,.02),rgba(7,86,63,.12)),linear-gradient(0deg,rgba(0,0,0,.30),transparent 46%)}
+.map-tools{position:absolute;top:14px;right:14px;z-index:4;display:flex;align-items:center;gap:8px;padding:7px 9px;border:1px solid rgba(255,255,255,.45);border-radius:999px;background:rgba(255,250,240,.86);backdrop-filter:blur(10px)}
+.map-view{height:28px;border:0;border-radius:999px;padding:0 11px;color:var(--green-dd);background:transparent;font-size:12px;font-weight:900;cursor:pointer}
+.map-view.on{color:#FFFAF0;background:var(--green)}
+.map-opacity{width:78px;accent-color:var(--warn)}
+.current-map-pin{position:absolute;left:25%;top:52%;z-index:4;width:24px;height:24px;border:3px solid rgba(255,250,240,.96);border-radius:50% 50% 50% 4px;background:var(--warn);box-shadow:0 8px 15px rgba(76,28,24,.24),0 0 0 7px rgba(135,49,43,.10);transform:translate(-50%,-50%) rotate(-45deg)}
+.current-map-pin::after{content:"";position:absolute;top:50%;left:50%;width:6px;height:6px;border-radius:50%;background:#FFFAF0;transform:translate(-50%,-50%)}
+.map-arrived{position:absolute;left:16px;bottom:14px;z-index:4;display:inline-flex;align-items:center;gap:8px;padding:8px 13px;border-radius:999px;color:#FFFAF0;background:rgba(4,57,42,.88);font-size:13px;font-weight:900;backdrop-filter:blur(8px)}
+.map-arrived::before{content:"";width:9px;height:9px;border-radius:50%;background:#58C2A1}
+.no-map-route{display:none;position:absolute;inset:0;z-index:3;padding:26px;background:radial-gradient(circle at 82% 14%,rgba(15,118,84,.14),transparent 30%),linear-gradient(145deg,#FFF8EA,#E9DCC5)}
+.routemap.no-map::before,.routemap.no-map::after,.routemap.no-map .current-map-pin,.routemap.no-map .map-arrived{display:none}.routemap.no-map .no-map-route{display:grid;align-content:center;gap:14px}
+.map-step{display:grid;grid-template-columns:42px 1fr auto;align-items:center;gap:12px;padding:12px;border:1px solid rgba(15,118,84,.15);border-radius:18px;background:rgba(255,255,255,.76);font-size:16px;font-weight:900}
+.map-step b{width:34px;height:34px;display:grid;place-items:center;border-radius:50%;color:#FFFAF0;background:var(--green);font-family:Georgia,serif}.map-step:first-child b{background:var(--warn)}.map-step small{font-size:12px;color:var(--muted)}
+.pcard{margin-top:16px;border-radius:24px;background:rgba(255,255,255,.90);box-shadow:0 12px 24px rgba(36,46,32,.08)}
+.phero{display:none}.pbody{padding:21px 20px 18px}.pbody h3{font-size:27px}.pbody .era{font-size:15px;line-height:1.45;margin:8px 0 16px}
+.vers{flex-wrap:nowrap;overflow-x:auto;gap:10px;margin-bottom:16px}.vers::-webkit-scrollbar{display:none}
+.vbtn{flex:0 0 auto;min-width:max-content;height:40px;padding:0 16px;border-radius:999px;font-size:14px;font-weight:900;background:var(--green-l);color:var(--green-dd)}
+.voicebox{padding:18px;border-radius:22px;margin-bottom:12px;background:#F3FAF5;border-color:#DCEAE3}
+.vb-head{gap:12px;margin-bottom:14px}.vb-avatar{width:43px;height:43px;font-size:20px}.vb-name{font-size:16px}.vb-state{font-size:12px}.kb-badge{font-size:11px;padding:6px 10px;margin:0}
+.wave{height:20px;margin:0 0 8px}.subtitle{height:192px;max-height:192px;font-size:20px;line-height:1.65;font-family:"LXGW WenKai","STKaiti","Kaiti SC","KaiTi","Microsoft YaHei",sans-serif}
+.askrow{gap:8px;margin-top:12px}.askrow input{height:43px;padding:8px 15px;font-size:13px}.askrow button{padding:0 18px;font-size:13px}.qchips{margin-top:9px}.qchip{font-size:11px;padding:4px 10px}
+.next-stop-card{position:absolute;right:30px;bottom:105px;left:30px;z-index:15;display:flex;align-items:center;gap:12px;min-height:54px;padding:12px 16px;border:1px solid rgba(15,118,84,.18);border-radius:18px;color:var(--green-dd);background:rgba(255,255,255,.94);box-shadow:0 12px 24px rgba(36,46,32,.10);font-size:16px;font-weight:900}
+.next-stop-card::before{content:"\2192";width:28px;height:28px;display:grid;place-items:center;border-radius:50%;color:#FFFAF0;background:var(--green);font-size:17px}
+.controls{position:absolute;right:30px;bottom:30px;left:30px;z-index:15;gap:12px}.mic{height:61px;border-radius:999px;padding:0;font-size:19px;box-shadow:0 14px 28px rgba(15,118,84,.28)}.mic.rec{background:var(--warn)}.mic svg{width:22px;height:22px}.iconbtn{width:54px;height:54px;font-size:24px}
+@media(max-width:760px){body{display:block;padding:0;background:#FBF8F0;overflow-x:hidden}.phone{transform:scale(calc(100vw / 680));transform-origin:top left;box-shadow:none}}
 </style>
 </head>
 <body>
@@ -211,11 +285,23 @@ body{font-family:-apple-system,"PingFang SC","Microsoft YaHei",sans-serif;
     <div class="chips" id="chips"></div>
 
     <div class="sect">路线 · 点一个点位 = 模拟走到（GPS 触发讲解）</div>
-    <div class="routemap" onclick="window.open('/static/img/route_map.png','_blank')">
-      <img src="/static/img/route_map.png" alt="步语 · 老城南线 手绘导览图" loading="lazy">
-      <div class="rm-cap">手绘导览图 · 点击放大</div>
-    </div>
     <div class="route" id="route"></div>
+    <div class="routemap" id="routemap">
+      <img src="/static/img/route_map.png" alt="步语 · 老城南线手绘导览图" loading="lazy">
+      <div class="rm-cap">手绘导览图</div>
+      <div class="current-map-pin" aria-label="当前位置：中华门"></div>
+      <div class="map-tools">
+        <button class="map-view on" id="mapview" type="button">地图</button>
+        <button class="map-view" id="nomapview" type="button">无图</button>
+        <input class="map-opacity" id="mapopacity" type="range" min="20" max="100" value="62" aria-label="地图透明度">
+      </div>
+      <div class="map-arrived" id="maparrived">中华门 · 已抵达 · GPS 触发讲解</div>
+      <div class="no-map-route" aria-hidden="true">
+        <div class="map-step"><b>1</b><span>中华门瓮城</span><small>现在</small></div>
+        <div class="map-step"><b>2</b><span>南京城墙博物馆</span><small>6 min</small></div>
+        <div class="map-step"><b>3</b><span>老门东历史文化街区</span><small>15 min</small></div>
+      </div>
+    </div>
 
     <div class="pcard" id="pcard" style="display:none">
       <div class="phero" id="phero">
@@ -240,6 +326,7 @@ body{font-family:-apple-system,"PingFang SC","Microsoft YaHei",sans-serif;
           <div class="subtitle ph" id="subtitle">点上方版本，或点路线点位，听实时语音讲解…</div>
         </div>
 
+        <div class="next-stop-card" id="nextstop">下一站：中华门瓮城-观光台</div>
         <div class="controls">
           <button class="mic" id="mic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2a3 3 0 0 0-3 3v6a3 3 0 0 0 6 0V5a3 3 0 0 0-3-3z"/><path d="M19 10v1a7 7 0 0 1-14 0v-1M12 18v4"/></svg><span id="mictx">按住说话（可打断）</span></button>
           <button class="iconbtn" id="stopbtn" title="打断">✕</button>
@@ -288,6 +375,18 @@ const SID="s"+Math.random().toString(36).slice(2,9);
 let DATA=null, curPoint=null, curVer="normal", selInterests=new Set();
 let ws=null, ac=null, playHead=0, recording=false, mediaRec=null, firstAudio=false;
 window.__cap=[];  // demo 录制用：记录每段 PCM 及其计划播放时刻（相对页面加载）
+
+$("mapview").onclick=()=>{
+  $("routemap").classList.remove("no-map");
+  $("mapview").classList.add("on");
+  $("nomapview").classList.remove("on");
+};
+$("nomapview").onclick=()=>{
+  $("routemap").classList.add("no-map");
+  $("nomapview").classList.add("on");
+  $("mapview").classList.remove("on");
+};
+$("mapopacity").oninput=e=>document.documentElement.style.setProperty("--map-opacity",Number(e.target.value)/100);
 
 // ---- Web Audio：播放 Step-Audio 流式 PCM16(24k) ----
 function ensureAC(){ if(!ac){ ac=new (window.AudioContext||window.webkitAudioContext)({sampleRate:24000}); playHead=ac.currentTime; } }
@@ -394,6 +493,11 @@ function selectPoint(pid){
   $("pcap").textContent=pt.photo_caption||"";
   const af=$("arriveflash"); af.classList.remove("go"); void af.offsetWidth; af.classList.add("go");
   $("pname").textContent=pt.name; $("pera").textContent=pt.era+" · "+pt.one_line;
+  $("maparrived").textContent=pt.name.replace(/（.*）/,"")+" · 已抵达 · GPS 触发讲解";
+  const routeIndex=DATA.route.points.indexOf(pid);
+  const nextPid=DATA.route.points[routeIndex+1];
+  const nextLabel=pid==="zhonghuamen"?"中华门瓮城-观光台":(nextPid?DATA.points[nextPid].name.replace(/（.*）/,""):"路线终点");
+  $("nextstop").textContent="下一站："+nextLabel;
   renderVers();
   $("qchips").innerHTML="";
   [pt.ask_back,"这里为什么重要？","有什么必看的？"].forEach(q=>{
