@@ -1,22 +1,13 @@
-.DS_Store
+# Local browser export artifacts
+.chrome-export-profile/
+.edge-export-profile/
 
-# Local secrets — NEVER commit
-.env
-.env.*
-!.env.example
+# Independent repository tracked separately
+buyu/
 
-# Python
-__pycache__/
-*.py[cod]
-.pytest_cache/
-.mypy_cache/
-.ruff_cache/
-
-# Virtual environments
-.venv/
-venv/
-
-# Build outputs
-dist/
-build/
-*.egg-info/
+# Presentation scratch and intermediate exports
+work/
+phone-white-frame.png
+phone-white-mockup.png
+outputs/buyu-roadshow-updated*.pptx
+outputs/*.inspect.ndjson
