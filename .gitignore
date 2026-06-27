@@ -20,3 +20,17 @@ venv/
 dist/
 build/
 *.egg-info/
+
+# Local browser export artifacts
+.chrome-export-profile/
+.edge-export-profile/
+
+# Independent repository tracked separately
+buyu/
+
+# Presentation scratch and intermediate exports
+work/
+phone-white-frame.png
+phone-white-mockup.png
+outputs/buyu-roadshow-updated*.pptx
+outputs/*.inspect.ndjson
